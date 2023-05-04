@@ -2,14 +2,13 @@ import { createRoot} from 'react-dom/client';
 //import statement to bundle scss
 
 import "./index.scss";
+import {MainView} from "./components/main-view/main-view"
 
 // Main components
 
 const FletnixApp = () => {
     return (
-        <div className = "fletnix">
-            <div>Hello World</div>
-        </div>
+        <MainView />
     );
 };
 
