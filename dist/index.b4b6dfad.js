@@ -27476,7 +27476,7 @@ const MovieView = ({ movie , onBackClick  })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: "genre: "
+                        children: "Genre: "
                     }, void 0, false, {
                         fileName: "src/components/movie-view/Movie-view.jsx",
                         lineNumber: 13,
