@@ -10,12 +10,14 @@ export const MainView = () => {
 ).then((response)=>
       response.json())
       .then((data)=> {
-        const moviesFromApi = data.docs.map((doc)=> {
+        // console.log(data)
+        const moviesFromApi = data.map((doc)=> {
+          console.log(doc)
           return {
-            id: doc.key,
-            title: doc.title,
-            director: doc.director_name?.[0],
-            genre: doc.genre
+            id: doc._id,
+            title: doc.Title,
+            director: doc.Director.Name,
+            genre: doc.Genre[0]
           };
         });
         setMovies(moviesFromApi);
@@ -38,9 +40,10 @@ export const MainView = () => {
     <div>
       {movies.map((movie) => (
         <MovieCard
-          key={movie.id}
+          key={movie._id}
           movie={movie}
           onMovieClick={(newSelectedMovie) => {
+            console.log(newSelectedMovie);
             setSelectedMovie(newSelectedMovie);
           }}
         />

@@ -20,5 +20,5 @@ MovieCard.propTypes = {
     director: PropTypes.string.isRequired
 
   }).isRequired,
-  onBookClick: PropTypes.func.isRequired
+  onMovieClick: PropTypes.func.isRequired
 };
