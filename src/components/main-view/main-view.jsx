@@ -1,29 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/Movie-card";
 import { MovieView } from "../movie-view/Movie-view";
 
 export const MainView = () => {
-  const [movies, setMovies] = useState([
-    {
-      id: 1,
-      title: "The 400 Blows",
-      director: "Francois Truffault",
-      genre: "Drama"
+  const [movies, setMovies] = useState([]);
 
-    },
-    {
-      id: 2,
-      title: "Paths of Glory",
-      director: "Stanely Kubric",
-      genre: "War"
-    },
-    {
-    id: 3,
-      title: "The Seventh Seal",
-      director: "Bergman",
-      genre: "History"
-    }
-  ]);
+  useEffect(() => {
+    fetch("https://fletnix-s949.onrender.com/movies"
+).then((response)=>
+      response.json())
+      .then((data)=> {
+        // console.log(data)
+        const moviesFromApi = data.map((doc)=> {
+          console.log(doc)
+          return {
+            id: doc._id,
+            title: doc.Title,
+            director: doc.Director.Name,
+            genre: doc.Genre.Title
+          };
+        });
+        setMovies(moviesFromApi);
+      });
+  }, []);
 
   const [selectedMovie, setSelectedMovie] = useState(null);
 
@@ -41,9 +40,10 @@ export const MainView = () => {
     <div>
       {movies.map((movie) => (
         <MovieCard
-          key={movie.id}
+          key={movie._id}
           movie={movie}
           onMovieClick={(newSelectedMovie) => {
+            console.log(newSelectedMovie);
             setSelectedMovie(newSelectedMovie);
           }}
         />
