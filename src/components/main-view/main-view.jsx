@@ -12,25 +12,6 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser? storedUser: null);
   const [token, setToken] =useState(storedToken? storedToken: null);
 
-  useEffect(() => {
-    fetch("https://fletnix-s949.onrender.com/movies"
-    ).then((response)=>
-      response.json())
-      .then((data)=> {
-        // console.log(data)
-        const moviesFromApi = data.map((doc)=> {
-         
-          return {
-            id: doc._id,
-            title: doc.Title,
-            director: doc.Director.Name,
-            genre: doc.Genre.Title
-          };
-        });
-        setMovies(moviesFromApi);
-      });
-  }, []);
-
   if (!user) {
     return (
     <>
@@ -55,10 +36,24 @@ export const MainView = () => {
     })
       .then((response)=> response.json())
       .then((movies)=> {
-        setMovies(movies);
+        const moviesFromApi = movies.map((movie)=> {
+         
+          return {
+            id: movie._id,
+            title: movie.Title,
+            director: movie.Director.Name,
+            genre: movie.Genre.Title
+          };
+        
       });
+      setMovies(moviesFromApi);
+    });
   }, [token]); //  this is the second argument of useEffect, ensures fetch is called everytime token changes
               // known as dependency array
+
+  useEffect(() => {
+    setMovies(movies);
+    }, [movies]);
 
   if (selectedMovie) {
     console.log(selectedMovie);
