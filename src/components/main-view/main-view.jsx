@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/Movie-card";
 import { MovieView } from "../movie-view/Movie-view";
 import { LoginView } from "../login-view/login-view";
+import { SignupView } from "../signup-view/signup-view";
 
 export const MainView = () => {
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-<<<<<<< Updated upstream
-
-=======
-  const [user, setUser] =useState(null);
->>>>>>> Stashed changes
+  const [user, setUser] = useState(storedUser? storedUser: null);
+  const [token, setToken] =useState(storedToken? storedToken: null);
 
   useEffect(() => {
     fetch("https://fletnix-s949.onrender.com/movies"
@@ -31,14 +31,35 @@ export const MainView = () => {
       });
   }, []);
 
-<<<<<<< Updated upstream
- 
-=======
   if (!user) {
-    return <LoginView onLoggedIn= {(user)=> setUser(user)} />;
+    return (
+    <>
+      <LoginView
+      onLoggedIn= {(user, token) => {
+        setUser(user);
+        setToken (token);
+      }} />
+      or
+      <SignupView />
+      </>
+  );
   }
 
->>>>>>> Stashed changes
+  useEffect(()=> {
+    if (!token) {
+      return; //return what?
+    }
+    fetch( "https://fletnix-s949.onrender.com/movies", 
+    {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+      .then((response)=> response.json())
+      .then((movies)=> {
+        setMovies(movies);
+      });
+  }, [token]); //  this is the second argument of useEffect, ensures fetch is called everytime token changes
+              // known as dependency array
+
   if (selectedMovie) {
     console.log(selectedMovie);
     return (
@@ -62,7 +83,7 @@ export const MainView = () => {
           }}
         />
       ))}
-      <button onClick={() => { setUser(null); }}>Logout</button>
+      <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
     </div>
   );
 };

@@ -12,20 +12,46 @@ export const LoginView = ({ onLoggedIn }) => {
     event.preventDefault();
 
     const data = {
-      access: username,
-      secret: password
-    };
+        Username: username,
+        Password: password
+      };
+  
+      fetch("https://fletnix-s949.onrender.com/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }).then((response) => response.json ())
+        .then((data)=> {
+            console.log("Login response: " + data);
+        if (data.user) {
+            localStorage.setItem("user", JSON.stringify(data.user));
+            localStorage.setItem("token", data.token)
+            onLoggedIn(data.user, data.token);
+          } else {
+              alert("User not found")
+          }
+      })
+        .catch((e)=> {
+            alert("Something went wrong")
+        });
 
-    fetch("https://openlibrary.org/account/login.json", {
-      method: "POST",
-      body: JSON.stringify(data)
-    }).then((response) => {
-        if (response.ok) {
-            onLoggedIn(username);
-        } else {
-            alert("Login failed!")
-        }
-    });
+    // const data = {
+    //   access: username,
+    //   secret: password
+    // };
+
+    // fetch("https://openlibrary.org/account/login.json", {
+    //   method: "POST",
+    //   body: JSON.stringify(data)
+    // }).then((response) => {
+    //     if (response.ok) {
+    //         onLoggedIn(username);
+    //     } else {
+    //         alert("Login failed!")
+    //     }
+    // });
   };
   return (
     <form onSubmit={handleSubmit}>
