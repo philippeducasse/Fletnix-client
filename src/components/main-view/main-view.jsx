@@ -4,6 +4,8 @@ import { MovieView } from "../movie-view/Movie-view";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
 
   useEffect(() => {
     fetch("https://fletnix-s949.onrender.com/movies"
@@ -12,7 +14,7 @@ export const MainView = () => {
       .then((data)=> {
         // console.log(data)
         const moviesFromApi = data.map((doc)=> {
-          console.log(doc)
+         
           return {
             id: doc._id,
             title: doc.Title,
@@ -24,9 +26,9 @@ export const MainView = () => {
       });
   }, []);
 
-  const [selectedMovie, setSelectedMovie] = useState(null);
-
+ 
   if (selectedMovie) {
+    console.log(selectedMovie);
     return (
       <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
     );
@@ -40,7 +42,7 @@ export const MainView = () => {
     <div>
       {movies.map((movie) => (
         <MovieCard
-          key={movie._id}
+          key={movie.id}
           movie={movie}
           onMovieClick={(newSelectedMovie) => {
             console.log(newSelectedMovie);
