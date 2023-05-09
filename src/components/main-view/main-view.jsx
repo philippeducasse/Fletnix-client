@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/Movie-card";
 import { MovieView } from "../movie-view/Movie-view";
+import { LoginView } from "../login-view/login-view";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+<<<<<<< Updated upstream
 
+=======
+  const [user, setUser] =useState(null);
+>>>>>>> Stashed changes
 
   useEffect(() => {
     fetch("https://fletnix-s949.onrender.com/movies"
-).then((response)=>
+    ).then((response)=>
       response.json())
       .then((data)=> {
         // console.log(data)
@@ -26,7 +31,14 @@ export const MainView = () => {
       });
   }, []);
 
+<<<<<<< Updated upstream
  
+=======
+  if (!user) {
+    return <LoginView onLoggedIn= {(user)=> setUser(user)} />;
+  }
+
+>>>>>>> Stashed changes
   if (selectedMovie) {
     console.log(selectedMovie);
     return (
@@ -50,6 +62,7 @@ export const MainView = () => {
           }}
         />
       ))}
+      <button onClick={() => { setUser(null); }}>Logout</button>
     </div>
   );
 };
