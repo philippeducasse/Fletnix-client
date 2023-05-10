@@ -12,19 +12,6 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser? storedUser: null);
   const [token, setToken] =useState(storedToken? storedToken: null);
 
-  if (!user) {
-    return (
-    <>
-      <LoginView
-      onLoggedIn= {(user, token) => {
-        setUser(user);
-        setToken (token);
-      }} />
-      or
-      <SignupView />
-      </>
-  );
-  }
 
   useEffect(()=> {
     if (!token) {
@@ -51,12 +38,21 @@ export const MainView = () => {
   }, [token]); //  this is the second argument of useEffect, ensures fetch is called everytime token changes
               // known as dependency array
 
-  useEffect(() => {
-    setMovies(movies);
-    }, [movies]);
+  if (!user) {
+    return (
+    <>
+      <LoginView
+      onLoggedIn= {(user, token) => {
+        setUser(user);
+        setToken (token);
+      }} />
+      or
+      <SignupView />
+      </>
+  );
+  }
 
   if (selectedMovie) {
-    console.log(selectedMovie);
     return (
       <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
     );
