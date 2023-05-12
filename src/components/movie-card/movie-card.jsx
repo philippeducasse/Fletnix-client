@@ -5,7 +5,7 @@ export const MovieCard = ({movie, onMovieClick}) => {
   return (
     <Card onClick={() => {
       onMovieClick(movie)}} variant="link">
-      {/* </Card><Card.Img variant="top" src={movie.image} />  */}
+      
       <Card.Body>
         <Card.Img variant="top" src={movie.image} />
         <Card.Title>{movie.title}</Card.Title>
