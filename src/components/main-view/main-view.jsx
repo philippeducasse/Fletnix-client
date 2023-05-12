@@ -41,6 +41,7 @@ export const MainView = () => {
               // known as dependency array
               console.log(user)
               console.log(token)
+              console.log(movies)
   if (!user) {
     
     return (
