@@ -39,10 +39,12 @@ export const MainView = () => {
     });
   }, [token]); //  this is the second argument of useEffect, ensures fetch is called everytime token changes
               // known as dependency array
-
+              console.log(user)
+              console.log(token)
   if (!user) {
+    
     return (
-    <>
+      <>
       <LoginView
       onLoggedIn= {(user, token) => {
         setUser(user);
