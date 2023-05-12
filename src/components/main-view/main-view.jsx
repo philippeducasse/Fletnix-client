@@ -4,6 +4,7 @@ import { MovieView } from "../movie-view/Movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 
+
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
@@ -27,6 +28,7 @@ export const MainView = () => {
          
           return {
             id: movie._id,
+            image: movie.ImageUrl,
             title: movie.Title,
             director: movie.Director.Name,
             genre: movie.Genre.Title

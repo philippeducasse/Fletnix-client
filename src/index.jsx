@@ -1,6 +1,6 @@
-import { createRoot} from 'react-dom/client';
+import {createRoot} from 'react-dom/client';
 //import statement to bundle scss
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 import {MainView} from "./components/main-view/main-view"
 
