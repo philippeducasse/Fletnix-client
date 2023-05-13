@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
-import { MovieCard } from "../movie-card/Movie-card";
-import { MovieView } from "../movie-view/Movie-view";
+import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import Row from 'react-bootstrap/Row';// rows can be divided into twelfths
+import Col from 'react-bootstrap/Col';
+import "../main-view/main-view.scss";
 
 
 export const MainView = () => {
@@ -33,55 +36,51 @@ export const MainView = () => {
             director: movie.Director.Name,
             genre: movie.Genre.Title
           };
-        
-      });
-      setMovies(moviesFromApi);
-    });
-  }, [token]); //  this is the second argument of useEffect, ensures fetch is called everytime token changes
-              // known as dependency array
-              console.log(user)
-              console.log(token)
-              console.log(movies)
-  if (!user) {
-    
-    return (
-      <>
-      <LoginView
-      onLoggedIn= {(user, token) => {
-        setUser(user);
-        setToken (token);
-      }} />
-      or
-      <SignupView />
-      </>
-  );
-  }
-
-  if (selectedMovie) {
-    return (
-      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-    );
-  }
-
-  if (movies.length === 0) {
-    return <div>The list is empty!
-      <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
-    </div>;
-  }
-
-  return (
-    <div>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            console.log(newSelectedMovie);
-            setSelectedMovie(newSelectedMovie);
-          }}
-        />
-      ))}
-      <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
-    </div>
-  );
-};
+         });
+          setMovies(moviesFromApi);
+          });
+         }, [token]); //  this is the second argument of useEffect, ensures fetch is called everytime token changes
+                      // known as dependency array
+          return (
+            // center the columns within a row
+            <Row className="justify-content-md-center">
+              {!user ? (
+                
+                <Col md={5}>
+                <LoginView
+                onLoggedIn= {(user, token) => {
+                  setUser(user);
+                  setToken (token);
+                }} />
+                or
+                <SignupView />
+                </Col>
+                
+              ) : selectedMovie ? (
+          // col set to 8 with MD breakpoint
+              <Col md={8}> 
+               <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+               </Col>
+                ) : (movies.length === 0) ? (
+                <div>The list is empty!
+                <button className="logout-button" onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
+              </div>
+                ) : ( <>
+                  {movies.map((movie) => (
+                    <Col key={movie.id} md={3} className= "mb-5">
+                      <MovieCard
+                        movie={movie}
+                        onMovieClick={(newSelectedMovie) => {
+                        setSelectedMovie(newSelectedMovie);
+                      }}
+                      />
+                    </Col>
+                  ))}
+                  <Col md={8}>
+                  <button className="logout-button" onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
+                  </Col>
+                </>
+              )}
+              </Row>
+            );
+          };
