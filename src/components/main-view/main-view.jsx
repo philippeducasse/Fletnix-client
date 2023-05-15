@@ -3,6 +3,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
 import Row from 'react-bootstrap/Row';// rows can be divided into twelfths
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -40,7 +41,11 @@ export const MainView = () => {
   // known as dependency array)
 
   return (
+    
     <BrowserRouter>
+    
+      <NavigationBar user onLoggedOut= {() => {setUser(null); setToken(null); localStorage.clear()}}/>
+    
       <Row className="justify-content-md-center">
         <Routes>
           <Route
