@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/Movie-card";
 import { MovieView } from "../movie-view/Movie-view";
+import { LoginView } from "../login-view/login-view";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [user, setUser] =useState(null);
 
   useEffect(() => {
     fetch("https://fletnix-s949.onrender.com/movies"
@@ -24,7 +27,9 @@ export const MainView = () => {
       });
   }, []);
 
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  if (!user) {
+    return <LoginView onLoggedIn= {(user)=> setUser(user)} />;
+  }
 
   if (selectedMovie) {
     return (
@@ -38,6 +43,7 @@ export const MainView = () => {
 
   return (
     <div>
+      <button onClick={() => { setUser(null); }}>Logout</button>
       {movies.map((movie) => (
         <MovieCard
           key={movie._id}
