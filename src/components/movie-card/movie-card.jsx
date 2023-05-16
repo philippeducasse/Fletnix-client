@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const MovieCard = ({movie}) => {
   return (
-    <Card>
+    <Card className= "h-100">
       <Card.Img variant="top" src={movie.image} />
       
       <Card.Body>
