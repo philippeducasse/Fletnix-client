@@ -3,23 +3,28 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { ProfileView } from "../profile-view/profile-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import Row from 'react-bootstrap/Row';// rows can be divided into twelfths
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "../main-view/main-view.scss";
 
-
+// WHY IS MAINVIEW.jsx NOT THE MAIN ENTRY POINT? WHY DOES IT NEED TO BE TRANSPILED TO INDEX.JSX?
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]); // first part of array is data and second part is the function to populate tarray
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
+  const updateUser = user => {
+    setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
+    } 
 
-  useEffect(() => {
+  useEffect(() => { //useEffect code runs code ON EVERY RENDER
     fetch("https://fletnix-s949.onrender.com/movies",
-      {
+       {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then((response) => response.json())
@@ -34,17 +39,21 @@ export const MainView = () => {
             genre: movie.Genre.Title
           };
         });
+       
         setMovies(moviesFromApi);
+        console.log(token);
       });
   }, [token]); //  this is the second argument of useEffect, ensures fetch is called everytime token changes
   // known as dependency array)
 
   return (
-    
+
     <BrowserRouter>
-    
-      <NavigationBar user onLoggedOut= {() => {setUser(null); setToken(null); localStorage.clear()}}/>
-    
+
+      <NavigationBar
+        user={user}
+        onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }} />
+
       <Row className="justify-content-md-center">
         <Routes>
           <Route
@@ -76,6 +85,20 @@ export const MainView = () => {
             }
           />
           <Route
+            path="/profile"
+            element={
+              !user ? (
+                <Navigate to="/login" replace />
+              ) : (
+                <ProfileView user={user} token={token} movies={movies} onLoggedOut={() => {
+                  setUser(null);
+                  setToken(null);
+                  localStorage.clear();
+                }} updateUser={updateUser} />
+              )
+            }
+          />
+          <Route
             path="/movies/:movieId"
             element={
               <>
@@ -83,11 +106,10 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <Col>The list is empty!
-                    <button className="logout-button" onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
                   </Col>
                 ) : (
                   <Col md={8}>
-                    <MovieView movies={movies} />
+                    <MovieView movies={movies} user={user} token={token} updateUser={updateUser}/>
                   </Col>
                 )}
               </>
@@ -100,8 +122,7 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>The list is empty!
-                    <button className="logout-button" onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button></Col>
+                  <Col>The list is empty!</Col>
                 ) : (
                   <>
                     {movies.map((movie) => (
