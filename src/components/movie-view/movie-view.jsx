@@ -9,6 +9,7 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
   const movie = movies.find((m) => m.id === movieId);
   const username = user.Username
   console.log(user);
+  console.log(token);
 
   // fetch(`https://fletnix-s949.onrender.com/users/`, {
   //   method: "GET",
@@ -39,13 +40,17 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
           .then((response)=> {
               if (response.ok) {
                   alert("Successfully got user info");
-                  updateUser(user);
+                  return response.json();
               } else {
                   alert(" failed")
               }
+          }).then((data) => {
+            console.log(data);
+            updateUser(data);
           });   
       }
   
+  window.getUser = getUser;
 
   const addToFavorites = () => {
 
@@ -58,7 +63,8 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
     }).then((response) => {
         if (response.ok) {
           alert("Successfully added to favorites");
-          updateUser(user);
+          console.log(username)
+          getUser(username);
         } else {
           alert(" failed to add to favorites")
         }

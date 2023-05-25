@@ -10,6 +10,8 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
     const [email, setEmail] = useState("");
     const [birthday, setBirthday] = useState("");
 
+    console.log(user);
+
     let favoriteMovies = movies.filter(m => user.Favorites.includes(m.id));
 
     const handleSubmit = (event) => {
@@ -68,10 +70,13 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
         })
         .then((response) => {
             if (response.ok) {
-                updateUser(user);
+                return response.json();
             } else {
                 alert("Update failed");
             }
+        })
+        .then((data) => {
+            updateUser(data);
         });
     };
 
