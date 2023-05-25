@@ -14,7 +14,6 @@ export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
         })
           .then((response)=> {
               if (response.ok) {
-                  alert("Successfully got user info");
                   return response.json();
               } else {
                   alert(" failed")
@@ -35,7 +34,7 @@ export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
         if (response.ok) {
           alert("Successfully removed from favorites");
           console.log(response);
-          getUser();
+          getUser(); // can usestate instead of making another API call
         } else {
           alert(" failed to add to favorites")
         }

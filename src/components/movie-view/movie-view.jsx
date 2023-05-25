@@ -30,6 +30,7 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
   // - call updateUser on result from fetch
 
   const getUser = (username) => {
+    //this logic can be replaced by using a change of state
     fetch(`https://fletnix-s949.onrender.com/users/${username}`, {
       method: "GET",
       headers: {

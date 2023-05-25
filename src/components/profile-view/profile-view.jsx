@@ -5,52 +5,12 @@ import { MovieCard } from "../movie-card/movie-card";
 
 export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) => {
 
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState(user.Username);
     const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [birthday, setBirthday] = useState("");
-
+    const [email, setEmail] = useState(user.Email);
+    const [birthday, setBirthday] = useState(user.Birthday);
     console.log(user);
-
     let favoriteMovies = movies.filter(m => user.Favorites.includes(m.id));
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = {
-            Username: username,
-            Password: password,
-            Email: email,
-            Birthday: birthday
-        };
-
-        fetch(`https://fletnix-s949.onrender.com/users/`, {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}` }
-        })
-        .then((response) => response.json())
-        .then(users => {
-            if (users) {
-                const filteredUser = users.filter(user => user.Username === username);
-                fetch(`https://fletnix-s949.onrender.com/users/${filteredUser}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
-                .then((response) => {
-                    if (response.ok) {
-                        window.location.reload();
-                    } else {
-                        alert("Failed to get username");
-                    }
-                });
-                console.log(user, username);
-            } else {
-                alert('Error');
-            }
-        });
-    };
 
     const updateProfile = () => {
         const data = {
@@ -60,7 +20,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
             Birthday: birthday
         };
 
-        fetch(`https://fletnix-s949.onrender.com/users/${user.Username}`, {
+        fetch(`https://fletnix-s949.onrender.com/users/${username}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
@@ -99,17 +59,12 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
 
     return (
         <>
-            <div>Your Info</div>
-            <div key={user.id} user={user} />
-            <div>Username: {user.Username}</div>
-            <div>Email: {user.Email}</div>
-            <div>Birthday: {user.Birthday}</div>
 
             <Col md={6}>
                 <Card className="mt-2 mb-3">
                     <Card.Body>
                         <Card.Title>Update your info</Card.Title>
-                        <Form onSubmit={handleSubmit}>
+                        <Form >
                             <Form.Group>
                                 <Form.Label>Username:</Form.Label>
                                 <Form.Control
@@ -123,7 +78,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
                             <Form.Group>
                                 <Form.Label>Password:</Form.Label>
                                 <Form.Control
-                                    type="text"
+                                    type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
