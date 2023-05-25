@@ -2,7 +2,45 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const MovieCard = ({movie}) => {
+export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
+
+  const getUser = () => {
+    fetch(`https://fletnix-s949.onrender.com/users/${user.Username}`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+          }
+        })
+          .then((response)=> {
+              if (response.ok) {
+                  alert("Successfully got user info");
+                  return response.json();
+              } else {
+                  alert(" failed")
+              }
+          }).then((data) => {
+            console.log(data);
+            updateUser(data);
+          });   
+      }
+
+  const removeFavorite = () => {
+    fetch(`https://fletnix-s949.onrender.com/users/${user.Username}/movies/${movie.id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    }).then((response) => {
+        if (response.ok) {
+          alert("Successfully removed from favorites");
+          console.log(response);
+          getUser();
+        } else {
+          alert(" failed to add to favorites")
+        }
+      });
+  }
   return (
     <Card className= "h-100">
       <Card.Img variant="top" src={movie.image} />
@@ -12,7 +50,11 @@ export const MovieCard = ({movie}) => {
         <Card.Text>{movie.author}</Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button variant="link">Details</Button>
-        </Link> 
+        </Link>
+        {isProfileView ? (
+          <Button onClick= {removeFavorite}>Remove from favorites</Button>
+        ):
+        (<></>)}
       </Card.Body>
     </Card>
   );

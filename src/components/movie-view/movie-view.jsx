@@ -49,8 +49,6 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
             updateUser(data);
           });   
       }
-  
-  window.getUser = getUser;
 
   const addToFavorites = () => {
 
