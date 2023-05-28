@@ -21,7 +21,7 @@ export const MainView = () => {
     setUser(user);
     localStorage.setItem("user", JSON.stringify(user));
     } 
-
+    
   useEffect(() => { //useEffect code runs code ON EVERY RENDER
     fetch("https://fletnix-s949.onrender.com/movies",
        {
@@ -36,12 +36,11 @@ export const MainView = () => {
             image: movie.ImageUrl,
             title: movie.Title,
             director: movie.Director.Name,
-            genre: movie.Genre.Title
+            genre: movie.Genre.Title,
           };
         });
        
         setMovies(moviesFromApi);
-        console.log(token);
       });
   }, [token]); //  this is the second argument of useEffect, ensures fetch is called everytime token changes
   // known as dependency array)
@@ -109,7 +108,7 @@ export const MainView = () => {
                   </Col>
                 ) : (
                   <Col md={8}>
-                    <MovieView movies={movies} user={user} token={token} updateUser={updateUser}/>
+                    <MovieView movies={movies} user={user} token={token} updateUser={updateUser} />
                   </Col>
                 )}
               </>
@@ -127,7 +126,8 @@ export const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-4" key={movie.id} md={3}>
-                        <MovieCard movie={movie} isProfileView={false} token={token} user={user} updateUser={updateUser}/>
+                        <MovieCard movie={movie} isProfileView={false} token={token} user={user} updateUser={updateUser}
+                        />
                       </Col>
                     ))}
                   </>

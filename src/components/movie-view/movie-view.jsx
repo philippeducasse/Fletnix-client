@@ -1,55 +1,37 @@
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-
 import "../movie-view/movie-view.scss";
+import { MovieCard } from "../movie-card/movie-card";
 
-export const MovieView = ({ movies, user, token, updateUser }) => {
+
+export const MovieView = ({ movies, user, token, updateUser}) => {
 
   const { movieId } = useParams();
   const movie = movies.find((m) => m.id === movieId);
-  const username = user.Username
-  console.log(user);
-  console.log(token);
-
-  // fetch(`https://fletnix-s949.onrender.com/users/`, {
-  //   method: "GET",
-  //   headers: { Authorization: `Bearer ${token}` }
-  // }).then((response) => response.json())
-  //   .then(users => {
-  //     if (users) {
-  //       users.filter(user => user.Username === username);
-
-  //     } else {
-  //       alert('Error');
-  //     }
-  //   })
-
-  // Things to do:
-  // - write a function that fetches the user by username
-  // - call that function in addToFavorites. 
-  // - call updateUser on result from fetch
+  const username = user.Username;
+  let similarMovies = movies.filter((m)=> movie.genre === m.genre);
+  console.log(movie);
 
   const getUser = (username) => {
     //this logic can be replaced by using a change of state
     fetch(`https://fletnix-s949.onrender.com/users/${username}`, {
       method: "GET",
       headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-          }
-        })
-          .then((response)=> {
-              if (response.ok) {
-                  alert("Successfully got user info");
-                  return response.json();
-              } else {
-                  alert(" failed")
-              }
-          }).then((data) => {
-            console.log(data);
-            updateUser(data);
-          });   
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       }
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Successfully got user info");
+          return response.json();
+        } else {
+          alert(" failed")
+        }
+      }).then((data) => {
+        updateUser(data);
+      });
+  }
 
   const addToFavorites = () => {
 
@@ -60,52 +42,59 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
         "Authorization": `Bearer ${token}`
       }
     }).then((response) => {
-        if (response.ok) {
-          alert("Successfully added to favorites");
-          console.log(username)
-          getUser(username);
-        } else {
-          alert(" failed to add to favorites")
-        }
-      });
+      if (response.ok) {
+        alert("Successfully added to favorites");
+        getUser(username);
+      } else {
+        alert(" failed to add to favorites")
+      }
+    });
 
     // Fetch to updtae user
-    
+
   }
 
-  return (
+return (
+  <div>
+    <img className="w-50" src={movie.image} />
     <div>
-      <img className="w-50" src={movie.image} />
-      <div>
-        <span>Title: </span>
-        <span>{movie.title}</span>
-      </div>
-      <div>
-        <span>Director: </span>
-        <span>{movie.director}</span>
-      </div>
-      <div>
-        <span>Genre: </span>
-        <span>{movie.genre}</span>
-      </div>
-      {/* <Link to= {`users/${user.Username}/movies/${movie.id}`}> */}
+      <span>Title: </span>
+      <span>{movie.title}</span>
+    </div>
+    <div>
+      <span>Director: </span>
+      <span>{movie.director}</span>
+    </div>
+    <div>
+      <span>Genre: </span>
+      <span>{movie.genre}</span>
+    </div>
+    {/* <Link to= {`users/${user.Username}/movies/${movie.id}`}> */}
+    <button
+      className="back-button"
+      style={{ cursor: "pointer" }}
+      onClick={() => addToFavorites()}>
+      Add to Favorites</button>
+    &emsp;
+    {/* </Link> */}
+    <Link to={"/"}>
       <button
         className="back-button"
         style={{ cursor: "pointer" }}
-        onClick={() => addToFavorites()}>
-        Add to Favorites</button>
-        &emsp;
-      {/* </Link> */}
-      <Link to={"/"}>
-        <button
-          className="back-button"
-          style={{ cursor: "pointer" }}
-        >
-          Back
-        </button>
-      </Link>
+      >
+        Back
+      </button>
+    </Link>
+    <hr />
+    <h2>Similar Movies</h2>
+    {console.log(similarMovies)}{
+    similarMovies.map((movie) => (
+      <div className="mb-4" key={movie.id} md={3}>
+        <MovieCard movie={movie}/>
+      </div>
+    ))}
 
-    </div>
-  );
+  </div>
+);
 };
 
