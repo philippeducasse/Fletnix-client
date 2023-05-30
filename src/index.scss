@@ -6,6 +6,6 @@ $color: steelblue;
     color: $color
 }
 
-$primary:Seagreen;
-$body-bg:Honeydew;
+$primary:rgb(46, 117, 139);
+$body-bg:rgb(240, 252, 255);
 @import '~bootstrap/scss/bootstrap.scss';

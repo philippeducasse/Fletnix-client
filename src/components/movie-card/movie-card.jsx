@@ -51,7 +51,7 @@ export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
           <Button variant="link">Details</Button>
         </Link>
         {isProfileView ? (
-          <Button onClick= {removeFavorite}>Remove from favorites</Button>
+          <Button onClick= {removeFavorite} width={30}>Remove from favorites</Button>
         ):
         (<></>)}
       </Card.Body>

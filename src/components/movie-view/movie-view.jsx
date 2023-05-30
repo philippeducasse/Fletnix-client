@@ -2,14 +2,17 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import "../movie-view/movie-view.scss";
 import { MovieCard } from "../movie-card/movie-card";
+import Row from 'react-bootstrap/Row';// rows can be divided into twelfths
+import Col from 'react-bootstrap/Col';
+import { Container, Card, Button } from "react-bootstrap";
 
 
-export const MovieView = ({ movies, user, token, updateUser}) => {
+export const MovieView = ({ movies, user, token, updateUser }) => {
 
   const { movieId } = useParams();
   const movie = movies.find((m) => m.id === movieId);
   const username = user.Username;
-  let similarMovies = movies.filter((m)=> movie.genre === m.genre);
+  let similarMovies = movies.filter((m) => movie.genre === m.genre && movie.id !== m.id);
   console.log(movie);
 
   const getUser = (username) => {
@@ -54,47 +57,55 @@ export const MovieView = ({ movies, user, token, updateUser}) => {
 
   }
 
-return (
-  <div>
-    <img className="w-50" src={movie.image} />
-    <div>
-      <span>Title: </span>
-      <span>{movie.title}</span>
-    </div>
-    <div>
-      <span>Director: </span>
-      <span>{movie.director}</span>
-    </div>
-    <div>
-      <span>Genre: </span>
-      <span>{movie.genre}</span>
-    </div>
-    {/* <Link to= {`users/${user.Username}/movies/${movie.id}`}> */}
-    <button
-      className="back-button"
-      style={{ cursor: "pointer" }}
-      onClick={() => addToFavorites()}>
-      Add to Favorites</button>
-    &emsp;
-    {/* </Link> */}
-    <Link to={"/"}>
-      <button
-        className="back-button"
-        style={{ cursor: "pointer" }}
-      >
-        Back
-      </button>
-    </Link>
-    <hr />
-    <h2>Similar Movies</h2>
-    {console.log(similarMovies)}{
-    similarMovies.map((movie) => (
-      <div className="mb-4" key={movie.id} md={3}>
-        <MovieCard movie={movie}/>
-      </div>
-    ))}
+  return (
+    <Container>
+      <Row>
+        <Col md={6}>
+          <Card >
+            <Card.Img className="h-50" src={movie.image} />
+            <Card.Title>Title: {movie.title}</Card.Title>
+            <Card.Header>Director: </Card.Header>
+            <Card.Text>{movie.director}</Card.Text>
+            <Card.Header>Genre: </Card.Header>
+            <Card.Text>{movie.genre}</Card.Text>
 
-  </div>
-);
+          </Card>
+        </Col>
+        {/* <Link to= {`users/${user.Username}/movies/${movie.id}`}> */}
+      </Row>
+
+      <Row>
+        <Col md={3}>
+          <Button
+            className="back-button"
+            style={{ cursor: "pointer" }}
+            onClick={() => addToFavorites()}>
+            Add to Favorites</Button>
+          {/* </Link> */}
+          </Col>
+          <Col>
+          <Link to={"/"}>
+            <Button
+              className="back-button"
+              style={{ cursor: "pointer" }}
+            >
+              Back
+            </Button>
+          </Link>
+        </Col>
+      </Row>
+      <Row>
+        <hr />
+        <h2>Similar Movies</h2>
+        {
+          similarMovies.map((movie) => (
+            <Col className="mb-4 height-50" key={movie.id} md={4}>
+              <MovieCard  movie={movie} md={3} />
+            </Col>
+          ))}
+
+      </Row>
+    </Container>
+  );
 };
 
