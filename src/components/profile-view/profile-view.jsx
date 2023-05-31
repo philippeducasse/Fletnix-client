@@ -111,7 +111,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
                 </Col>
                 <Row>
                 <Col md={2}>
-                <Button onClick={deleteAccount}>Delete Account</Button>
+                <Button onClick={deleteAccount} variant="danger">Delete Account</Button>
                 </Col>
                 </Row>
 

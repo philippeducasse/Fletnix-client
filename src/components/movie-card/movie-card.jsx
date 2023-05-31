@@ -53,7 +53,24 @@ export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
         {isProfileView ? (
           <Button onClick= {removeFavorite} width={30}>Remove from favorites</Button>
         ):
-        (<></>)}
+        (<>
+        {/* <Button
+          className="back-button justify-content-md-center"
+          style={{ cursor: "pointer" }}
+          onClick={() => addToFavorites()}>
+          Add to Favorites</Button>
+        
+        
+        <Link to={"/"}>
+          <Button
+            className="back-button justify-content-md-center"
+            style={{ cursor: "pointer" }}
+          >
+            Back
+          </Button>
+        </Link> */}
+        </>
+        )}
       </Card.Body>
     </Card>
   );

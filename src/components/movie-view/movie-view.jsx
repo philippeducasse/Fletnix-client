@@ -59,7 +59,7 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
 
   return (
     <Container>
-      <Row>
+      <Row className="justify-content-md-center">
         <Col md={6}>
           <Card >
             <Card.Img className="h-50" src={movie.image} />
@@ -68,34 +68,28 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
             <Card.Text>{movie.director}</Card.Text>
             <Card.Header>Genre: </Card.Header>
             <Card.Text>{movie.genre}</Card.Text>
+            <Button
+          style={{ cursor: "pointer" }}
+          onClick={() => addToFavorites()}>
+          Add to Favorites</Button>
+        
+        
+        <Link to={"/"}>
+          <Button
+            className="back-button justify-content-md-center"
+            style={{ cursor: "pointer" }}
+          >
+            Back
+          </Button>
+        </Link>
 
           </Card>
         </Col>
-        {/* <Link to= {`users/${user.Username}/movies/${movie.id}`}> */}
+    
       </Row>
 
-      <Row>
-        <Col md={3}>
-          <Button
-            className="back-button"
-            style={{ cursor: "pointer" }}
-            onClick={() => addToFavorites()}>
-            Add to Favorites</Button>
-          {/* </Link> */}
-          </Col>
-          <Col>
-          <Link to={"/"}>
-            <Button
-              className="back-button"
-              style={{ cursor: "pointer" }}
-            >
-              Back
-            </Button>
-          </Link>
-        </Col>
-      </Row>
-      <Row>
-        <hr />
+       
+        <Row>
         <h2>Similar Movies</h2>
         {
           similarMovies.map((movie) => (
@@ -103,8 +97,11 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
               <MovieCard  movie={movie} md={3} />
             </Col>
           ))}
-
       </Row>
+      
+        
+
+      
     </Container>
   );
 };
