@@ -6,10 +6,37 @@
     border-radius: 4px
 }
 
-.Container {
-    border: 1px solid red
-}
-
 img {
     width: 100%
+}
+.back-button{
+    margin: 20px ;
+
+}
+.card {
+    text-align: center;
+}
+.similar-movies{
+    height: 70%;
+}
+.card-title{
+    margin: 10px;
+    font-weight: bold;
+}
+.card-header {
+    background-color: rgb(235, 241, 247);
+    font-weight: 600;
+    margin: 10px;
+}
+.card-text:last-child{
+    margin: 10px;
+}
+.card-text{
+    margin: 10px;
+}
+.card-img-top {
+    height: 70%
+}
+.favorites{
+    height:50%;
 }
