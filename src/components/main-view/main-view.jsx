@@ -7,6 +7,7 @@ import { ProfileView } from "../profile-view/profile-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import Row from 'react-bootstrap/Row';// rows can be divided into twelfths
 import Col from 'react-bootstrap/Col';
+import { Form } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "../main-view/main-view.scss";
 
@@ -17,11 +18,12 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]); // first part of array is data and second part is the function to populate tarray
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [search, setSearch] = useState("")
   const updateUser = user => {
     setUser(user);
     localStorage.setItem("user", JSON.stringify(user));
     } 
-    
+  console.log(search)
   useEffect(() => { //useEffect code runs code ON EVERY RENDER
     fetch("https://fletnix-s949.onrender.com/movies",
        {
@@ -52,6 +54,7 @@ export const MainView = () => {
       <NavigationBar
         user={user}
         onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }} />
+        
 
       <Row className="justify-content-md-center">
         <Routes>
@@ -89,7 +92,7 @@ export const MainView = () => {
               !user ? (
                 <Navigate to="/login" replace />
               ) : (
-                <ProfileView user={user} token={token} movies={movies} onLoggedOut={() => {
+                <ProfileView user={user} token={token} movies={movies} isProfileView={true} onLoggedOut={() => {
                   setUser(null);
                   setToken(null);
                   localStorage.clear();
@@ -124,7 +127,23 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                  <Row className="justify-content-md-center">
+                  <Col md={4}>
+                  <Form className="m-3">
+                    <Form.Control
+                      onChange= {(m) => setSearch(m.target.value)}
+                      type="search"
+                      placeholder="Search by Movie Title"
+                      className="me-2"
+                      aria-label="Search"
+                    />
+                  </Form>
+                  </Col>
+                  </Row>
+                    {movies.filter((searchInput)=>{
+                      return search.toLowerCase() === ''? searchInput: searchInput.title.toLowerCase().includes(search)}
+                      )
+                      .map((movie) => (
                       <Col className="mb-4" key={movie.id} md={3}>
                         <MovieCard movie={movie} isProfileView={false} token={token} user={user} updateUser={updateUser}
                         />

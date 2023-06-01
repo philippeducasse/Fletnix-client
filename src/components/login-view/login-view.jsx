@@ -61,7 +61,7 @@ export const LoginView = ({ onLoggedIn }) => {
             minLength="6"
             ></Form.Control>
             </Form.Group>
-        <Button variant= "primary" type="submit">
+        <Button variant= "primary" type="submit" className="mt-3">
             Submit 
         </Button>
     </Form>

@@ -3,13 +3,13 @@ import { useState } from "react";
 import { Form, Button, Col, Row, Card, Container } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 
-export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) => {
-
+export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) => { //isProfileView prop is not getting read
+    
     const [username, setUsername] = useState(user.Username);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState(user.Email);
     const [birthday, setBirthday] = useState(user.Birthday);
-    console.log(user);
+   
     let favoriteMovies = movies.filter(m => user.Favorites.includes(m.id));
 
     const updateProfile = () => {
@@ -58,8 +58,9 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
     };
 
     return (
-        <Container className="align-items-center">
-            <Row>
+        <Container>
+            
+            <Row className= "justify-content-md-center">
 
                 <Col md={6}>
                     <Card className="mt-2 mb-3">
@@ -109,17 +110,19 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
                         </Card.Body>
                     </Card>
                 </Col>
-                <Row>
-                <Col md={2}>
-                <Button onClick={deleteAccount} variant="danger">Delete Account</Button>
-                </Col>
+            </Row>
+                <Row className= "justify-content-md-center">
+                    <Col md={2}>
+                        <Button onClick={deleteAccount} variant="danger">Delete Account</Button>
+                    </Col>
                 </Row>
-
+                <Row>
                 <Col md={12}>
-                    <h3 className="mt-3 mb-3 text-light">Your favorite movies:</h3>
+                    <h3 className="mt-3 mb-3 text-dark">Your favorite movies:</h3>
                 </Col>
                 </Row>
-                <Row>
+            
+            <Row>
                 {favoriteMovies.map(movie => (
                     <Col className="mb-4" key={movie.id} md={3} xs={12} >
                         <MovieCard movie={movie} isProfileView={true} token={token} user={user} updateUser={updateUser} />
