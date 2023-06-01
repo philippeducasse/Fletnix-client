@@ -11,6 +11,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
     const [birthday, setBirthday] = useState(user.Birthday);
    
     let favoriteMovies = movies.filter(m => user.Favorites.includes(m.id));
+    console.log(isProfileView)
 
     const updateProfile = () => {
         const data = {
@@ -64,11 +65,11 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
 
                 <Col md={6}>
                     <Card className="mt-2 mb-3">
-                        <Card.Body>
+                        <Card.Body >
                             <Card.Title>Update your info</Card.Title>
                             <Form >
                                 <Form.Group>
-                                    <Form.Label>Username:</Form.Label>
+                                    <Form.Label className= "text-start">Username:</Form.Label>
                                     <Form.Control
                                         type="text"
                                         value={username}
