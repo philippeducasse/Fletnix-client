@@ -23,7 +23,7 @@ export const MainView = () => {
     setUser(user);
     localStorage.setItem("user", JSON.stringify(user));
     } 
-  console.log(search)
+
   useEffect(() => { //useEffect code runs code ON EVERY RENDER
     fetch("https://fletnix-s949.onrender.com/movies",
        {
@@ -141,7 +141,9 @@ export const MainView = () => {
                   </Col>
                   </Row>
                     {movies.filter((searchInput)=>{
-                      return search.toLowerCase() === ''? searchInput: searchInput.title.toLowerCase().includes(search)}
+                      const lowerCaseSearch = search.toLowerCase()
+                      return lowerCaseSearch === ''? searchInput: searchInput.title.toLowerCase().includes(lowerCaseSearch)}
+                      
                       )
                       .map((movie) => (
                       <Col className="mb-4" key={movie.id} md={3}>
