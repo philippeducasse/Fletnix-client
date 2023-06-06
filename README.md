@@ -8,7 +8,7 @@ https://flet-nix.netlify.app/
 
 ## Screenshots ##
 
-./Screenshots/main-view.png
+![view of main view](./Screenshots/Main-view.png "Main View")
 
 ## The Project
 

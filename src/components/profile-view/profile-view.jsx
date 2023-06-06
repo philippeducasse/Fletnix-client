@@ -90,7 +90,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
                                 <Form.Group>
                                     <Form.Label>Email:</Form.Label>
                                     <Form.Control
-                                        type="text"
+                                        type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
