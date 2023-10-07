@@ -17,7 +17,7 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
 
   const getUser = (username) => {
     //this logic can be replaced by using a change of state
-    fetch(`https://fletnix-s949.onrender.com/users/${username}`, {
+    fetch(`https://fletnix-1sgs.onrender.com/users/${username}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const MovieView = ({ movies, user, token, updateUser }) => {
 
   const addToFavorites = () => {
 
-    fetch(`https://fletnix-s949.onrender.com/users/${username}/movies/${movie.id}`, {
+    fetch(`https://fletnix-1sgs.onrender.com/users/${username}/movies/${movie.id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

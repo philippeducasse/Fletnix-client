@@ -20,7 +20,7 @@ const handleSubmit = (event) => {
         };
     
 
-    fetch("https://fletnix-s949.onrender.com/users", { 
+    fetch("https://fletnix-1sgs.onrender.com/users", { 
         method: "POST",
         body: JSON.stringify(data),
         headers: {

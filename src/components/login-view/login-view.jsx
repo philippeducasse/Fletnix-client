@@ -17,7 +17,7 @@ export const LoginView = ({ onLoggedIn }) => {
         Password: password
       };
   
-      fetch("https://fletnix-s949.onrender.com/login", {
+      fetch("https://fletnix-1sgs.onrender.com/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

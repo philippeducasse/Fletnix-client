@@ -20,7 +20,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
             Birthday: birthday
         };
 
-        fetch(`https://fletnix-s949.onrender.com/users/${username}`, {
+        fetch(`https://fletnix-1sgs.onrender.com/users/${username}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
@@ -41,7 +41,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
     };
 
     const deleteAccount = () => {
-        fetch(`https://fletnix-s949.onrender.com/users/${user.Username}`, {
+        fetch(`https://fletnix-1sgs.onrender.com/users/${user.Username}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`
