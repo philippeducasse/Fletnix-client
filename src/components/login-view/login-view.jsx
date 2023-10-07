@@ -17,7 +17,7 @@ export const LoginView = ({ onLoggedIn }) => {
         Password: password
       };
   
-      fetch("https://https://fletnix-b399cde14eec.herokuapp.com/.onrender.com/login", {
+      fetch("https://fletnix-b399cde14eec.herokuapp.com/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

@@ -20,7 +20,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
             Birthday: birthday
         };
 
-        fetch(`https://https://fletnix-b399cde14eec.herokuapp.com/.onrender.com/users/${username}`, {
+        fetch(`https://fletnix-b399cde14eec.herokuapp.com/users/${username}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
@@ -41,7 +41,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
     };
 
     const deleteAccount = () => {
-        fetch(`https://https://fletnix-b399cde14eec.herokuapp.com/.onrender.com/users/${user.Username}`, {
+        fetch(`https://fletnix-b399cde14eec.herokuapp.com/users/${user.Username}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`

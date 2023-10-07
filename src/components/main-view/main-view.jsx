@@ -25,7 +25,7 @@ export const MainView = () => {
     } 
     
   useEffect(() => { //useEffect code runs code ON EVERY RENDER
-    fetch("https://https://fletnix-b399cde14eec.herokuapp.com/.onrender.com/movies",
+    fetch("https://fletnix-b399cde14eec.herokuapp.com/movies",
        {
         headers: { Authorization: `Bearer ${token}` }
       })

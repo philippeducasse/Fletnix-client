@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
 
   const getUser = () => {
-    fetch(`https://https://fletnix-b399cde14eec.herokuapp.com/users/${user.Username}`, {
+    fetch(`https://fletnix-b399cde14eec.herokuapp.com/users/${user.Username}`, {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
       }
 
   const removeFavorite = () => {
-    fetch(`https://https://fletnix-b399cde14eec.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
+    fetch(`https://fletnix-b399cde14eec.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${token}`
