@@ -23,9 +23,9 @@ export const MainView = () => {
     setUser(user);
     localStorage.setItem("user", JSON.stringify(user));
     } 
-    https://fletnix-1sgs.onrender.com/
+    
   useEffect(() => { //useEffect code runs code ON EVERY RENDER
-    fetch("https://fletnix-1sgs.onrender.com/movies",
+    fetch("https://https://fletnix-b399cde14eec.herokuapp.com/.onrender.com/movies",
        {
         headers: { Authorization: `Bearer ${token}` }
       })
