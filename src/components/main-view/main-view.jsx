@@ -107,7 +107,7 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>The list is empty!
+                  <Col>List is empty, please refresh page!
                   </Col>
                 ) : (
                   <Col md={8}>
@@ -124,7 +124,7 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
+                  <Col>The list is empty, please refresh page!</Col>
                 ) : (
                   <>
                   <Row className="justify-content-md-center">
