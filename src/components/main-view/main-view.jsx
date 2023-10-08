@@ -11,7 +11,6 @@ import { Form } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "../main-view/main-view.scss";
 
-// WHY IS MAINVIEW.jsx NOT THE MAIN ENTRY POINT? WHY DOES IT NEED TO BE TRANSPILED TO INDEX.JSX?
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");

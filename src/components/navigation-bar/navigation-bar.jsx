@@ -5,8 +5,6 @@ import { useState } from "react";
 
 
 export const NavigationBar = ({ user, onLoggedOut, isProfileView, movies, setMovies }) => {
-  //this isn't working
-  console.log(isProfileView)
   
   return (
     <Navbar bg="light" expand="lg">
