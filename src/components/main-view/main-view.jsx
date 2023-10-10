@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
-import { MovieView } from "../movie-view/movie-view";
+import  MovieView  from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { ProfileView } from "../profile-view/profile-view";
@@ -11,7 +11,7 @@ import { Form } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "../main-view/main-view.scss";
 
-export const MainView = () => {
+const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
   const [movies, setMovies] = useState([]); // first part of array is data and second part is the function to populate tarray
@@ -161,4 +161,4 @@ export const MainView = () => {
   );
 };
 
-
+export default MainView;

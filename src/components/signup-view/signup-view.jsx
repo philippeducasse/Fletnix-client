@@ -71,7 +71,7 @@ const handleSubmit = (event) => {
             <Form.Group controlId="formBirthday">
                 <Form.Label>Birthday:</Form.Label>
                 <Form.Control 
-                    type= "date"
+                    type="date"
                     value= {birthday}
                     onChange= {(e)=> setBirthday(e.target.value)}
                     required

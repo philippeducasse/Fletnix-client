@@ -1,18 +1,25 @@
-import React from "react";
-import { useState } from "react";
-import { Form, Button, Col, Row, Card, Container } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Form, Button, Col, Row, Card, Container, Modal } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
+import ModalView from "../modal-view/modal-view";
 
-export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) => { //isProfileView prop is not getting read
-    
+export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) => { 
+
     const [username, setUsername] = useState(user.Username);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState(user.Email);
     const [birthday, setBirthday] = useState(user.Birthday);
-   
+    const [displayConfirmationModal, setDisplayConfirmationModal] = useState(false);
+    // modal variables
+    const [type, setType] = useState(null);
+    const [id, setId] = useState(null);
+    const [message, setMessage] = useState('');
+    const [showModal, setShowModal] = useState(false);
+
     let favoriteMovies = movies.filter(m => user.Favorites.includes(m.id));
 
-    const updateProfile = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         const data = {
             Username: username,
             Password: password,
@@ -30,13 +37,22 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
         })
             .then((response) => {
                 if (response.ok) {
+                    // console.log(response.json())
                     return response.json();
-                } else {
-                    alert("Update failed");
                 }
             })
             .then((data) => {
-                updateUser(data);
+                console.log(data)
+                if (data) {
+                    updateUser(data);
+                    alert('Update successful');
+                } else {
+                    alert("Invalid user data received. Please fill in all fields or check your submission");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                alert('An error occurred during the update. Please check your submission');
             });
     };
 
@@ -57,10 +73,42 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
             });
     };
 
+    const displayModal = () => {
+        setType('danger');
+        setMessage('Are you sure you want to delete your account?')
+        setShowModal(true);
+    }
+
+    const hideModal = () => {
+        setShowModal(false)
+    }
+    //CODE TO DISPLAY BIRTHDAY IN FORM --> MODIFY HOW IT IS STORED ON DB
+    // useEffect(() => {
+    //     const dateString = { birthday };
+    //     console.log(dateString.birthday)
+    //     // Create a Date object from the input date string
+    //     const dateObject = new Date(dateString.birthday);
+    //     console.log({ dateObject })
+    //     // Get the day, month, and year components from the Date object
+    //     const day = dateObject.getUTCDate();
+    //     const month = dateObject.getUTCMonth() + 1; // Add 1 because months are zero-based
+    //     const year = dateObject.getUTCFullYear();
+
+    //     // Pad the day and month with leading zeros if needed (e.g., 03 instead of 3)
+    //     const formattedDay = day.toString().padStart(2, '0');
+    //     const formattedMonth = month.toString().padStart(2, '0');
+
+    //     // Create the formatted date string in "dd.mm.yyyy" format
+    //     const formattedDate = `${formattedDay}.${formattedMonth}.${year}`;
+    //     // Output: "dd.mm.yyyy"
+
+    //     setBirthday(formattedDate);
+    // }
+    // )
     return (
         <Container>
-            
-            <Row className= "justify-content-md-center">
+
+            <Row className="justify-content-md-center">
 
                 <Col md={6}>
                     <Card className="mt-2 mb-3">
@@ -72,9 +120,14 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
                                     <Form.Control
                                         type="text"
                                         value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
+
+                                        onChange={(e) => {
+
+                                            setUsername(e.target.value);
+                                        }
+
+                                        }
                                         required
-                                        minLength="6"
                                     />
                                 </Form.Group>
                                 <Form.Group>
@@ -105,30 +158,40 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
                                         required
                                     />
                                 </Form.Group>
-                                <Button onClick={updateProfile} className="mt-3" variant="primary" type="submit">Submit</Button>
+                                <Button onClick={handleSubmit} className="mt-3" variant="primary" type="submit">Submit</Button>
                             </Form>
                         </Card.Body>
                     </Card>
                 </Col>
             </Row>
-                <Row className= "justify-content-md-center">
-                    <Col md={2}>
-                        <Button onClick={deleteAccount} variant="danger">Delete Account</Button>
-                    </Col>
-                </Row>
-                <Row>
+            <Row className="justify-content-md-center">
+                <Col md={2}>
+                    <Button 
+                    onClick={displayModal} 
+                    variant="danger">Delete Account</Button>
+                </Col>
+            </Row>
+            <Row>
                 <Col md={12}>
                     <h3 className="mt-3 mb-3 text-dark">Your favorite movies:</h3>
                 </Col>
-                </Row>
-            
+            </Row>
+
             <Row>
-                {favoriteMovies.map(movie => (
+                
+                {favoriteMovies.length === 0 ? (
+                    <Col md={12}>
+                    <p>You have no favorite movies.</p>
+                </Col>
+                ) : (
+                favoriteMovies.map(movie => (
                     <Col className="mb-4" key={movie.id} md={3} xs={12} >
                         <MovieCard movie={movie} isProfileView={true} token={token} user={user} updateUser={updateUser} />
                     </Col>
+                )
                 ))}
             </Row>
+            <ModalView showModal={showModal} hideModal={hideModal} deleteAccount={deleteAccount} message={message} id={id} type={type} />
         </Container>
     );
 };
