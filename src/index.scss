@@ -1,11 +1,13 @@
 
 
-$color: steelblue;
+$color: black;
 
 .fletnix {
     color: $color
 }
 
+
+
 $primary:rgb(46, 117, 139);
-$body-bg:rgb(240, 252, 255);
+$body-bg:rgb(0, 0, 0);
 @import '~bootstrap/scss/bootstrap.scss';

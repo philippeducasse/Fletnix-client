@@ -17,11 +17,9 @@ const MovieView = ({ movies, user, token, updateUser }) => {
 
   // modal variables
   const [type, setType] = useState(null);
-  const [id, setId] = useState(null);
   const [message, setMessage] = useState('');
   const [title, setTitle] = useState('')
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState(null)
 
   const getUser = (username) => {
     //this logic can be replaced by using a change of state
@@ -113,47 +111,68 @@ const MovieView = ({ movies, user, token, updateUser }) => {
 
   return (
     <Container>
-      <Row className="justify-content-md-center">
-        <Col md={6}>
+      <Row>
+        <Col md={4}>
           <Card >
-            <Card.Img className="h-50" src={movie.image} />
-            <Card.Title>Title: {movie.title}</Card.Title>
-            <Card.Header> Director: </Card.Header>
-            <Card.Text>
-              <Button variant="link" onClick={displayDirectorModal}>{movie.director} </Button>
-            </Card.Text>
-            <Card.Header>Genre: </Card.Header>
-            <Card.Text>
-              <Button variant="link" onClick={displayGenreModal}>{movie.genre} </Button>
-            </Card.Text>
-            <Button
-              style={{ cursor: "pointer" }}
-              onClick={() => addToFavorites()}>
-              Add to Favorites</Button>
+            <Card.Body className="d-flex flex-column justify-content-between">
+              <Row>
+                <Card.Img className="h-100" src={movie.image} />
+              </Row>
+              <Row>
 
-
-            <Link to={"/"}>
-              <Button
-                className="back-button justify-content-md-center"
-                style={{ cursor: "pointer" }}
-              >
-                Back
-              </Button>
-            </Link>
+                <Card.Title className="mt-4">{movie.title}</Card.Title>
+              </Row>
+              <Row>
+                <Col>
+                  <Card.Header className="bg-black text-light"> Director: </Card.Header>
+                  <Card.Text>
+                    <Button className="fs-6" variant="link" onClick={displayDirectorModal}>{movie.director}</Button>
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <Card.Header className="bg-black text-light">Genre: </Card.Header>
+                  <Card.Text>
+                    <Button className="fs-6" variant="link" onClick={displayGenreModal}>{movie.genre}</Button>
+                  </Card.Text>
+                </Col>
+              </Row>
+              <Row className="d-flex align-items-center mt=2">
+                <Col >
+                  <Button
+                    style={{ cursor: "pointer" }}
+                    onClick={() => addToFavorites()}
+                    className="fs-6"
+                  >
+                    Add to Favorites
+                  </Button>
+                  </Col>
+                  <Col>
+                  <Link to={"/"}>
+                    <Button
+                      className="back-button justify-content-md-center m-3"
+                      style={{ cursor: "pointer" }}
+                    >
+                      Back
+                    </Button>
+                  </Link>
+                </Col>
+              </Row>
+            </Card.Body>
           </Card>
         </Col>
+        <Col md={8} >
+          <h2 className="similar-movies__title">Similar Movies</h2>
+          <Row className="justify-content-right">
+            {similarMovies.map((movie) => (
+              <Col md={4} className="mb-4 height-100" key={movie.id}>
+                <MovieCard movie={movie} md={3} />
+              </Col>
+            ))}
+          </Row>
+        </Col>
       </Row>
-      <Row>
-        <h2>Similar Movies</h2>
-        {
-          similarMovies.map((movie) => (
-            <Col className="mb-4 height-50" key={movie.id} md={4}>
-              <MovieCard movie={movie} md={3} />
-            </Col>
-          ))}
-      </Row>
-      <ModalView showModal={showModal} hideModal={hideModal} title={title} message={message} id={id} type={type} />
-    </Container>
+      <ModalView showModal={showModal} hideModal={hideModal} title={title} message={message} type={type} />
+    </Container >
   );
 };
 

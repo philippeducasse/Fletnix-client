@@ -4,10 +4,20 @@
 }
 .navbar-brand {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 30px;
-    color: steelblue;
+    font-size: 40px;
+    color: #337ab7;
+    border-radius: 50%;
+}
+.navbar-brand:hover{
+    color:#fff
 }
 .nav-link {
     font-weight: bold;
-    color: black;
+    color: #fff;
+}
+.navbar-toggler{
+    color: #fff;
+    background-color: #fff;
+    padding: 7px;
+
 }

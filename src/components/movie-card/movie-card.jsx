@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
+import "./movie-card.scss"
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
 
 export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
 
@@ -41,11 +43,11 @@ export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
       });
   }
   return (
-    <Card className= "h-100">
+    <Card className="h-100">
       <Card.Img variant="top" src={movie.image} />
       
-      <Card.Body>
-        <Card.Title>{movie.title}</Card.Title>
+      <Card.Body className= "card-body" >
+        <Card.Title className="card-title">{movie.title}</Card.Title>
         <Card.Text>{movie.author}</Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button variant="link">Details</Button>

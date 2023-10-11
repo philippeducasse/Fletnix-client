@@ -12,7 +12,6 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
     const [displayConfirmationModal, setDisplayConfirmationModal] = useState(false);
     // modal variables
     const [type, setType] = useState(null);
-    const [id, setId] = useState(null);
     const [message, setMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
 
@@ -65,7 +64,6 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
         })
             .then((response) => {
                 if (response.ok) {
-                    alert("Account successfully deleted");
                     onLoggedOut();
                 } else {
                     alert("Delete failed");
@@ -191,7 +189,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
                 )
                 ))}
             </Row>
-            <ModalView showModal={showModal} hideModal={hideModal} deleteAccount={deleteAccount} message={message} id={id} type={type} />
+            <ModalView showModal={showModal} hideModal={hideModal} deleteAccount={deleteAccount} message={message} type={type} />
         </Container>
     );
 };

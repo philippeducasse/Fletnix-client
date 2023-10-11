@@ -18,6 +18,7 @@ const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [search, setSearch] = useState("")
+  
   const updateUser = user => {
     setUser(user);
     localStorage.setItem("user", JSON.stringify(user));
@@ -49,12 +50,9 @@ const MainView = () => {
   return (
 
     <BrowserRouter>
-
       <NavigationBar
         user={user}
         onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }} />
-        
-
       <Row className="justify-content-md-center">
         <Routes>
           <Route
@@ -109,7 +107,7 @@ const MainView = () => {
                   <Col>List is empty, please refresh page!
                   </Col>
                 ) : (
-                  <Col md={8}>
+                  <Col md={10} >
                     <MovieView movies={movies} user={user} token={token} updateUser={updateUser} />
                   </Col>
                 )}
@@ -133,7 +131,7 @@ const MainView = () => {
                       onChange= {(m) => setSearch(m.target.value)}
                       type="search"
                       placeholder="Search by Movie Title"
-                      className="me-2"
+                      className="me-2 text-light"
                       aria-label="Search"
                     />
                   </Form>

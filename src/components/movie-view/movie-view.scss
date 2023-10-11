@@ -1,3 +1,5 @@
+
+
 .back-button {
     padding: 4px 12px 4px 12px;
     color: whitesmoke;
@@ -6,12 +8,9 @@
     border-radius: 4px
 }
 
-img {
-    width: 100%
-}
-.back-button{
-    margin: 20px ;
 
+.btn-link{
+    margin-bottom: 10px;
 }
 .card {
     text-align: center;
@@ -19,32 +18,32 @@ img {
 .similar-movies{
     height: 70%;
 }
+h2{
+    color: #fff
+}
 .card-title{
-    margin: 10px;
     font-weight: bold;
+    color: #fff;
 }
 .card-header {
-    background-color: rgb(235, 241, 247);
+    background-color: #fff;
     font-weight: 600;
-    margin: 10px;
 }
-.card-text:last-child{
-    margin: 10px;
-}
-.card-text{
-    margin: 10px;
-}
+
 .card-img-top {
     height: 70%
 }
 .favorites{
     height:50%;
 }
-.btn-primary{
-    width:50%;
-    margin: 10 auto;
+
+.similar-movies__title{
+    margin: 30px;
+    text-align: center;
 }
-h2{
-    margin: 20;
-    padding-top: 20;
+.btn{
+    margin: 5px
+}
+.back-button{
+    padding: 5px 55px;
 }
