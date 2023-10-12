@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import "../movie-view/movie-view.scss";
@@ -9,6 +10,10 @@ import { Container, Card, Button } from "react-bootstrap";
 import ModalView from "../modal-view/modal-view";
 
 const MovieView = ({ movies, user, token, updateUser }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page when the component is mounted
+  }, []);
 
   const { movieId } = useParams();
   const movie = movies.find((m) => m.id === movieId);
@@ -51,7 +56,7 @@ const MovieView = ({ movies, user, token, updateUser }) => {
       }
     }).then((response) => {
       if (response.ok) {
-        alert("Successfully added to favorites");
+        displayFavoritesModal();
         getUser(username);
       } else {
         alert(" failed to add to favorites")
@@ -105,14 +110,20 @@ const MovieView = ({ movies, user, token, updateUser }) => {
     });
     setShowModal(true);
   }
+
+  const displayFavoritesModal = () => {
+    setTitle('')
+    setMessage('Successfully added movie to favorites')
+    setShowModal(true);
+  }
   const hideModal = () => {
     setShowModal(false)
   }
 
   return (
-    <Container>
-      <Row>
-        <Col md={4}>
+    <Container fluid>
+      <Row className="mb-5">
+        <Col md={10} lg={4} xl={4} className=" m-xs-5">
           <Card >
             <Card.Body className="d-flex flex-column justify-content-between">
               <Row>
@@ -129,7 +140,7 @@ const MovieView = ({ movies, user, token, updateUser }) => {
                     <Button className="fs-6" variant="link" onClick={displayDirectorModal}>{movie.director}</Button>
                   </Card.Text>
                 </Col>
-                <Col>
+                <Col >
                   <Card.Header className="bg-black text-light">Genre: </Card.Header>
                   <Card.Text>
                     <Button className="fs-6" variant="link" onClick={displayGenreModal}>{movie.genre}</Button>
@@ -137,19 +148,19 @@ const MovieView = ({ movies, user, token, updateUser }) => {
                 </Col>
               </Row>
               <Row className="d-flex align-items-center mt=2">
-                <Col >
+                <Col className="movie-view__button-container">
                   <Button
                     style={{ cursor: "pointer" }}
                     onClick={() => addToFavorites()}
-                    className="fs-6"
+                    className=" movie-view__button fs-6"
                   >
                     Add to Favorites
                   </Button>
-                  </Col>
-                  <Col>
+                </Col>
+                <Col className="movie-view__button-container">
                   <Link to={"/"}>
                     <Button
-                      className="back-button justify-content-md-center m-3"
+                      className=" movie-view__button back-button justify-content-md-center "
                       style={{ cursor: "pointer" }}
                     >
                       Back
@@ -160,15 +171,22 @@ const MovieView = ({ movies, user, token, updateUser }) => {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={8} >
+        <Col className="d-none d-md-block"></Col>
+        <Col md={10} lg={7} xl={6}>
           <h2 className="similar-movies__title">Similar Movies</h2>
-          <Row className="justify-content-right">
-            {similarMovies.map((movie) => (
-              <Col md={4} className="mb-4 height-100" key={movie.id}>
-                <MovieCard movie={movie} md={3} />
-              </Col>
-            ))}
-          </Row>
+          {similarMovies.length === 0 ? (
+
+            <p className="d-flex text-align-center no-similar text-light ">No other movies of {movie.genre} genre in the archive!</p>
+          ) : (
+            <Row className="justify-content-right " >
+              {similarMovies.map((movie) => (
+                <Col xs={12} sm={6} md={4} lg={4} xl={4} className="mb-4 h-100 similar-movies" key={movie.id}>
+                  <MovieCard movie={movie} />
+                </Col>
+              ))}
+            </Row>
+          )
+          }
         </Col>
       </Row>
       <ModalView showModal={showModal} hideModal={hideModal} title={title} message={message} type={type} />

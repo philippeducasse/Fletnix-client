@@ -104,7 +104,7 @@ const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>List is empty, please refresh page!
+                  <Col className="text-light text-center" >List is empty, please refresh page!
                   </Col>
                 ) : (
                   <Col md={10} >
@@ -121,7 +121,7 @@ const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>The list is empty, please refresh page!</Col>
+                  <Col className="text-light text-center">The list is empty, please refresh page!</Col>
                 ) : (
                   <>
                   <Row className="justify-content-md-center">
@@ -143,7 +143,7 @@ const MainView = () => {
                       
                       )
                       .map((movie) => (
-                      <Col className="mb-4" key={movie.id} md={3}>
+                      <Col className="mb-4" key={movie.id} md={5} sm = {6} xs={12} lg = {4} xl={3}>
                         <MovieCard movie={movie} isProfileView={false} token={token} user={user} updateUser={updateUser}
                         />
                       </Col>

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import "./movie-card.scss"
 import { Button, Card } from "react-bootstrap";
+import "./movie-card.scss"
 import { Link } from "react-router-dom";
 
 
@@ -34,11 +34,10 @@ export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
       }
     }).then((response) => {
         if (response.ok) {
-          alert("Successfully removed from favorites");
           console.log(response);
           getUser(); // can usestate instead of making another API call
         } else {
-          alert(" failed to add to favorites")
+          alert(" failed to remove from favorites")
         }
       });
   }
@@ -47,13 +46,13 @@ export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
       <Card.Img variant="top" src={movie.image} />
       
       <Card.Body className= "card-body" >
-        <Card.Title className="card-title">{movie.title}</Card.Title>
+        <Card.Title className="card-title fs-xs-8">{movie.title}</Card.Title>
         <Card.Text>{movie.author}</Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-          <Button variant="link">Details</Button>
+          <Button className="btn btn-primary">Details</Button>
         </Link>
         {isProfileView ? (
-          <Button onClick= {removeFavorite} width={30}>Remove from favorites</Button>
+          <Button onClick= {removeFavorite} className="remove-btn">Remove from favorites</Button>
         ):
         (<>
         </>

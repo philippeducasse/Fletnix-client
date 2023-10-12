@@ -3,6 +3,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import ModalView from "../modal-view/modal-view";
+import "../signup-view/signup-view.scss"
 
 
 export const SignupView = () => {
@@ -57,7 +58,7 @@ export const SignupView = () => {
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form  className="text-light mb-5" onSubmit={handleSubmit}>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
                 <Form.Control
@@ -96,7 +97,7 @@ export const SignupView = () => {
                     required
                 />
             </Form.Group>
-            <Button type="submit">Submit</Button>
+            <Button className="submit-button" type="submit">Submit</Button>
             <ModalView showModal={showModal} hideModal={hideModal} message={message} type={type}/>
         </Form>
     );

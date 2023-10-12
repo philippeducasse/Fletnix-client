@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Form, Button, Col, Row, Card, Container, Modal } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 import ModalView from "../modal-view/modal-view";
+import "../profile-view/profile-view.scss"
 
-export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) => { 
+export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) => {
 
     const [username, setUsername] = useState(user.Username);
     const [password, setPassword] = useState("");
@@ -109,10 +110,10 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
             <Row className="justify-content-md-center">
 
                 <Col md={6}>
-                    <Card className="mt-2 mb-3">
-                        <Card.Body>
-                            <Card.Title>Update your info</Card.Title>
-                            <Form >
+                    <Card className="mt-2 mb-3 text-dark">
+                        <Card.Body className="bg-light text-dark">
+                            <Card.Title id="form-title">Update your info</Card.Title>
+                            <Form className="text-start">
                                 <Form.Group>
                                     <Form.Label>Username:</Form.Label>
                                     <Form.Control
@@ -156,38 +157,37 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
                                         required
                                     />
                                 </Form.Group>
-                                <Button onClick={handleSubmit} className="mt-3" variant="primary" type="submit">Submit</Button>
+                                <Row >
+                                    <Col>
+                                <Button onClick={handleSubmit}  variant="primary" type="submit">Submit</Button>
+                                <Button
+                                    onClick={displayModal}
+                                    variant="danger">Delete Account</Button></Col></Row>
                             </Form>
                         </Card.Body>
                     </Card>
                 </Col>
             </Row>
-            <Row className="justify-content-md-center">
-                <Col md={2}>
-                    <Button 
-                    onClick={displayModal} 
-                    variant="danger">Delete Account</Button>
-                </Col>
-            </Row>
+            
             <Row>
                 <Col md={12}>
-                    <h3 className="mt-3 mb-3 text-dark">Your favorite movies:</h3>
+                    <h3 className="mt-3 mb-3 text-light">Your favorite movies:</h3>
                 </Col>
             </Row>
 
-            <Row>
-                
+            <Row className="favorite-movies">
+
                 {favoriteMovies.length === 0 ? (
-                    <Col md={12}>
-                    <p>You have no favorite movies.</p>
-                </Col>
-                ) : (
-                favoriteMovies.map(movie => (
-                    <Col className="mb-4" key={movie.id} md={3} xs={12} >
-                        <MovieCard movie={movie} isProfileView={true} token={token} user={user} updateUser={updateUser} />
+                    <Col md={10}>
+                        <p className="text-light">You have no favorite movies.</p>
                     </Col>
-                )
-                ))}
+                ) : (
+                    favoriteMovies.map(movie => (
+                        <Col className="mb-4" key={movie.id} md={4} xl={3}>
+                            <MovieCard movie={movie} isProfileView={true} token={token} user={user} updateUser={updateUser} />
+                        </Col>
+                    )
+                    ))}
             </Row>
             <ModalView showModal={showModal} hideModal={hideModal} deleteAccount={deleteAccount} message={message} type={type} />
         </Container>
