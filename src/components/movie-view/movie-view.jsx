@@ -105,7 +105,7 @@ const MovieView = ({ movies, user, token, updateUser }) => {
             setMessage(movies[0].Genre.Description);
           });
       } else {
-        alert("Failed to get director info");
+        alert("Failed to get genre info");
       }
     });
     setShowModal(true);

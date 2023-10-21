@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
-import  MovieView  from "../movie-view/movie-view";
+import MovieView from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { ProfileView } from "../profile-view/profile-view";
@@ -18,15 +18,15 @@ const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [search, setSearch] = useState("")
-  
+
   const updateUser = user => {
     setUser(user);
     localStorage.setItem("user", JSON.stringify(user));
-    } 
-    
+  }
+
   useEffect(() => { //useEffect code runs code ON EVERY RENDER
     fetch("https://fletnix-b399cde14eec.herokuapp.com/movies",
-       {
+      {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then((response) => response.json())
@@ -41,11 +41,11 @@ const MainView = () => {
             genre: movie.Genre.Name,
           };
         });
-       
+
         setMovies(moviesFromApi);
       });
   }, [token]); //  this is the second argument of useEffect, ensures fetch is called everytime token changes
-  // known as dependency array)
+  // known as dependency array
 
   return (
 
@@ -124,30 +124,34 @@ const MainView = () => {
                   <Col className="text-light text-center">The list is empty, please refresh page!</Col>
                 ) : (
                   <>
-                  <Row className="justify-content-md-center">
-                  <Col md={4}>
-                  <Form className="m-3">
-                    <Form.Control
-                      onChange= {(m) => setSearch(m.target.value)}
-                      type="search"
-                      placeholder="Search by Movie Title"
-                      className="me-2 text-light"
-                      aria-label="Search"
-                    />
-                  </Form>
-                  </Col>
-                  </Row>
-                    {movies.filter((searchInput)=>{
-                      const lowerCaseSearch = search.toLowerCase()
-                      return lowerCaseSearch === ''? searchInput: searchInput.title.toLowerCase().includes(lowerCaseSearch)}
-                      
-                      )
-                      .map((movie) => (
-                      <Col className="mb-4" key={movie.id} md={5} sm = {6} xs={12} lg = {4} xl={3}>
-                        <MovieCard movie={movie} isProfileView={false} token={token} user={user} updateUser={updateUser}
-                        />
+                    <Row className="justify-content-md-center">
+                      <Col md={4}>
+                        <Form className="m-3">
+                          <Form.Control
+                            onChange={(m) => setSearch(m.target.value)}
+                            type="search"
+                            placeholder="Search by Movie Title"
+                            className="me-2 text-dark"
+                            aria-label="Search"
+                          />
+                        </Form>
+                      </Col>
+                    </Row>
+                    {movies.filter((searchInput) => {
+                      const lowerCaseSearch = search.toLowerCase();
+                      if (lowerCaseSearch === '' || searchInput.title.toLowerCase().includes(lowerCaseSearch)) {
+                        return true; // Movie matches the search or no search term
+                      } else {
+                        <Col className="text-light text-center">No movies found!</Col> // NOT WORKING
+                        return false; // Movie doesn't match the search term
+                      }
+                    }).map((movie) => (
+                      <Col className="mb-4" key={movie.id} md={5} sm={6} xs={12} lg={4} xl={3}>
+                        <MovieCard movie={movie} isProfileView={false} token={token} user={user} updateUser={updateUser} />
                       </Col>
                     ))}
+
+                   
                   </>
                 )}
               </>
