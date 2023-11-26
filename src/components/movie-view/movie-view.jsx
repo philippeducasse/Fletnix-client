@@ -27,7 +27,6 @@ const MovieView = ({ movies, user, token, updateUser }) => {
   const [showModal, setShowModal] = useState(false);
 
   const getUser = (username) => {
-    //this logic can be replaced by using a change of state
     fetch(`https://fletnix-b399cde14eec.herokuapp.com/users/${username}`, {
       method: "GET",
       headers: {

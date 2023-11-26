@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import "../navigation-bar/navigation-bar.scss"
-import { useState } from "react";
 import { Navbar, Container, Nav, Form} from "react-bootstrap";
+import "../navigation-bar/navigation-bar.scss"
 
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
@@ -9,7 +8,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
     <Navbar bg="black" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/" className="">
+        <Navbar.Brand as={Link} to="/" className="navbar-custom text-light">
           Fletnix
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -18,23 +17,23 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
 
             {!user && (
               <>
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link className= "text-light" as={Link} to="/login">
                   Login
                 </Nav.Link>
-                <Nav.Link as={Link} to="/signup">
+                <Nav.Link className="text-light" as={Link} to="/signup">
                   Signup
                 </Nav.Link>
               </>
             )}
             {user && (
               <>
-                <Nav.Link as={Link} to="/">
+                <Nav.Link className="text-light" as={Link} to="/">
                   Home
                 </Nav.Link>
-                <Nav.Link as={Link} to="/profile">
+                <Nav.Link className="text-light" as={Link} to="/profile">
                   Profile
                 </Nav.Link>
-                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                <Nav.Link className="text-light" onClick={onLoggedOut}>Logout</Nav.Link>
                 </>
             )}
 

@@ -10,7 +10,6 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState(user.Email);
     const [birthday, setBirthday] = useState(user.Birthday);
-    const [displayConfirmationModal, setDisplayConfirmationModal] = useState(false);
     // modal variables
     const [type, setType] = useState(null);
     const [message, setMessage] = useState('');
