@@ -79,7 +79,6 @@ const MovieView = ({ movies, user, token, updateUser }) => {
 
             setMessage(message)
             setTitle(director.Name);
-            // setMessage(message);
           });
       } else {
         alert("Failed to get director info");
@@ -107,6 +106,11 @@ const MovieView = ({ movies, user, token, updateUser }) => {
         alert("Failed to get genre info");
       }
     });
+    setShowModal(true);
+  }
+  const displaySynopsisModal = (description) => {
+    setTitle('Synopsis')
+    setMessage(description)
     setShowModal(true);
   }
 
@@ -145,6 +149,11 @@ const MovieView = ({ movies, user, token, updateUser }) => {
                     <Button className="fs-6" variant="link" onClick={displayGenreModal}>{movie.genre}</Button>
                   </Card.Text>
                 </Col>
+                <Col >
+                  <Card.Text>
+                    <Button className="fs-6" variant="link" onClick={() => displaySynopsisModal(movie.description)}>Synopsis</Button>
+                  </Card.Text>
+                </Col>
               </Row>
               <Row className="d-flex align-items-center mt=2">
                 <Col className="movie-view__button-container">
@@ -177,9 +186,9 @@ const MovieView = ({ movies, user, token, updateUser }) => {
 
             <p className="d-flex text-align-center no-similar text-light ">No other movies of {movie.genre} genre in the archive!</p>
           ) : (
-            <Row className="justify-content-right " >
+            <Row className="justify-content-right min-vh-60" >
               {similarMovies.map((movie) => (
-                <Col xs={12} sm={6} md={4} lg={4} xl={4} className="mb-4 h-100 similar-movies" key={movie.id}>
+                <Col xs={12} sm={6} md={4} lg={4} xl={4} className="mb-4 h-100 similar-movies profile-movie" key={movie.id}>
                   <MovieCard movie={movie} />
                 </Col>
               ))}

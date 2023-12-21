@@ -2,7 +2,7 @@
 
 ## Project Description ##
 
-This app allows users to access a library of movies; displaying information about each movies, such as genre and director. Users can register an account, login, browse through the list of movies, see movies of similar genres, and add movies to a list of favorites, which then appears on their profile page. Users can also update their credentials and delete their account.
+This app allows users to access a library of movies; displaying information about each movies, such as a synposis, genre, and director. Users can register an account, login, browse through the list of movies, see movies of similar genres, and add movies to a list of favorites, which then appears on their profile page. Users can also update their credentials and delete their account.
 
 This project was built using React to create the front-end of the app and is a Single Page Application (SPA). The app is connected to a API which was created in another project (see <a>https://github.com/philippeducasse/movie_api</a>). 
 
@@ -27,7 +27,7 @@ https://flet-nix.netlify.app/
 
 To run this project on your machine, install first install parcel by running these commands in your folder directory
 
-- npm install parcel
+- npm install parcel --save-dev
 
 then install react:
 
@@ -35,7 +35,7 @@ then install react:
 
 to build the app, run 
 
-- parcel [path to index.html]
+- npx parcel src/index.html
 
 
 ## Credits
