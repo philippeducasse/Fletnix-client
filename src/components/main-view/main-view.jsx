@@ -26,36 +26,36 @@ const MainView = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-        try {
-            const response = await fetch("https://fletnix-b399cde14eec.herokuapp.com/movies", {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            
-            if (!response.ok) {
-                throw new Error('Failed to fetch movies');
-            }
-            
-            const moviesData = await response.json();
-            
-            const moviesFromApi = moviesData.map((movie) => ({
-                id: movie._id,
-                image: movie.ImageUrl,
-                title: movie.Title,
-                director: movie.Director.Name,
-                genre: movie.Genre.Name,
-                description: movie.Description
-            }));
-            
-            setMovies(moviesFromApi);
-        } catch (error) {
-            // Handle errors, e.g., display a message or log the error
-            console.error('Error fetching movies:', error.message);
+      try {
+        const response = await fetch("https://fletnix-b399cde14eec.herokuapp.com/movies", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch movies');
         }
+
+        const moviesData = await response.json();
+
+        const moviesFromApi = moviesData.map((movie) => ({
+          id: movie._id,
+          image: movie.ImageUrl,
+          title: movie.Title,
+          director: movie.Director.Name,
+          genre: movie.Genre.Name,
+          description: movie.Description
+        }));
+
+        setMovies(moviesFromApi);
+      } catch (error) {
+        // Handle errors, e.g., display a message or log the error
+        console.error('Error fetching movies:', error.message);
+      }
     };
 
     fetchMovies();
-}, [token]);
- //  this is the second argument of useEffect, ensures fetch is called everytime token changes
+  }, [token]);
+  //  this is the second argument of useEffect, ensures fetch is called everytime token changes
   // known as dependency array
 
   return (
@@ -115,7 +115,9 @@ const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col className="text-light text-center" >List is empty, please refresh page!
+                  <Col className="text-light text-center loader" >
+                    <div className="spinner"></div>
+                    <p>Retrieving movies, please wait...</p>
                   </Col>
                 ) : (
                   <Col md={10} >
@@ -132,7 +134,11 @@ const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col className="text-light text-center">The list is empty, please refresh page!</Col>
+                  <Col className="text-light text-center loader">
+                    <div className="spinner">
+                    </div>
+                    <p>Retrieving movies, please wait...</p>
+                  </Col>
                 ) : (
                   <>
                     <Row className="justify-content-center">
@@ -142,7 +148,7 @@ const MainView = () => {
                             onChange={(m) => setSearch(m.target.value)}
                             type="search"
                             placeholder="Search by Movie Title"
-                            className="me-2 text-dark"
+                            className="me-2 text-dark search-bar"
                             aria-label="Search"
                           />
                         </Form>
@@ -162,7 +168,7 @@ const MainView = () => {
                       </Col>
                     ))}
 
-                   
+
                   </>
                 )}
               </>
