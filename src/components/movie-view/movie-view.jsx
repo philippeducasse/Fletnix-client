@@ -188,7 +188,7 @@ const MovieView = ({ movies, user, token, updateUser }) => {
           ) : (
             <Row className="justify-content-right min-vh-60" >
               {similarMovies.map((movie) => (
-                <Col xs={12} sm={6} md={4} lg={4} xl={4} className="mb-4 h-100 similar-movies profile-movie" key={movie.id}>
+                <Col md={6} lg={4} xl={4} className="mb-4 h-100 similar-movies profile-movie" key={movie.id}>
                   <MovieCard movie={movie} />
                 </Col>
               ))}

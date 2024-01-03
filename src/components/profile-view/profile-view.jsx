@@ -108,7 +108,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
 
             <Row className="justify-content-md-center">
 
-                <Col md={6}>
+                <Col md={8}>
                     <Card className="mt-2 mb-3 text-dark">
                         <Card.Body className="bg-light text-dark">
                             <Card.Title id="form-title">Update your info</Card.Title>

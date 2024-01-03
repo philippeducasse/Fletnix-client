@@ -85,7 +85,7 @@ return (
               {user ? (
                 <Navigate to="/" />
               ) : (
-                <Col md={5}>
+                <Col md={7}>
                   <LoginView onLoggedIn={(user, token) => { setUser(user); setToken(token); }} />
                 </Col>
               )}
@@ -140,7 +140,7 @@ return (
               ) : (
                 <>
                   <Row className="justify-content-center">
-                    <Col md={4}>
+                    <Col md={5}>
                       <Form className="m-3">
                         <Form.Control
                           onChange={(m) => setSearch(m.target.value)}
@@ -161,7 +161,7 @@ return (
                       return false; // Movie doesn't match the search term
                     }
                   }).map((movie) => (
-                    <Col className="mb-4" key={movie.id} md={5} sm={6} xs={10} lg={4} xl={3} >
+                    <Col className="mb-4" key={movie.id} md={6} sm={10} lg={4} xl={3} >
                       <MovieCard movie={movie} isProfileView={false} token={token} user={user} updateUser={updateUser} />
                     </Col>
                   ))}

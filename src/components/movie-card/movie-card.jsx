@@ -46,7 +46,7 @@ export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
       <Card.Img variant="top" src={movie.image} className="h-60 movie-image"/>
       
       <Card.Body className= "card-body h-100" >
-        <Card.Title className="card-title fs-xs-8 text-small" >{movie.title}</Card.Title>
+        <Card.Title className="card-title fs-xs-8" >{movie.title}</Card.Title>
         <Card.Text>{movie.author}</Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button className="btn btn-primary">Details</Button>
