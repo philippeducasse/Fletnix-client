@@ -124,7 +124,7 @@ const MovieView = ({ movies, user, token, updateUser }) => {
   }
 
   return (
-    <Container fluid>
+    <Container>
       <Row className="mb-5">
         <Col md={10} lg={4} xl={4} className=" m-xs-5">
           <Card >
