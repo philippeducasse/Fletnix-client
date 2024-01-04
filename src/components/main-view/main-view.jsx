@@ -161,7 +161,7 @@ return (
                       return false; // Movie doesn't match the search term
                     }
                   }).map((movie) => (
-                    <Col className="mb-4" key={movie.id} md={6} sm={10} lg={4} xl={3} >
+                    <Col className="mb-4" key={movie.id} md={10} lg={4} xl={3} >
                       <MovieCard movie={movie} isProfileView={false} token={token} user={user} updateUser={updateUser} />
                     </Col>
                   ))}
