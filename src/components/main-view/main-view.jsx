@@ -62,7 +62,7 @@ return (
     <NavigationBar
       user={user}
       onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }} />
-    <Row className="justify-content-center">
+    <Row className="justify-content-center mx-md-8">
       <Routes>
         <Route
           path="/signup"
@@ -161,7 +161,7 @@ return (
                       return false; // Movie doesn't match the search term
                     }
                   }).map((movie) => (
-                    <Col className="mb-4" key={movie.id} md={10} lg={4} xl={3} >
+                    <Col className="mb-4 mx-md-4" key={movie.id} md={8} lg={4} xl={3} >
                       <MovieCard movie={movie} isProfileView={false} token={token} user={user} updateUser={updateUser} />
                     </Col>
                   ))}
