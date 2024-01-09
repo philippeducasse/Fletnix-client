@@ -1,12 +1,44 @@
 .navbar-custom {
-    color: #337ab7!important;
+    color: #337ab7 !important;
 }
-.navbar-custom:hover{
-    color: #fff!important;
+
+.nav-items {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.nav-group {
+    display: flex;
+    align-items: center;
+    font-size: x-large;
+}
+
+.navbar {
+    border-bottom: solid 3px #337ab7;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.nav-group path {
+    color: #337ab7;
+    width: 30px
+}
+
+.nav-welcome{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    font-size: x-large;
+}
+
+.navbar-custom:hover {
+    color: #fff !important;
     transition: 500ms;
 }
+
 .navbar-brand {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 40px;
     color: #337ab7;
     border-radius: 50%;
@@ -17,23 +49,24 @@
     color: #fff;
     text-align: right;
 }
+
 .nav-link:hover {
-    color: #337ab7!important;
+    color: #337ab7 !important;
 
 }
 
-.navbar-toggler{
+.navbar-toggler {
     color: #fff;
     background-color: #fff;
     padding: 7px;
 
 }
 
-a:active{
-    color:#337ab7;
+a:active {
+    color: #337ab7;
 }
 
-a:target{
-    color:#337ab7;
+a:target {
+    color: #337ab7;
 }
 
