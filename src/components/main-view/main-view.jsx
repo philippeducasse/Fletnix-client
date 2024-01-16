@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';// rows can be divided into twelfths
 import Col from 'react-bootstrap/Col';
 import { Form } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate, Router } from "react-router-dom";
-import "../main-view/main-view.scss";
+import "./main-view.scss";
 
 const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -64,6 +64,7 @@ return (
       onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }} />
     <Row className="justify-content-center mx-md-8">
       <Routes>
+        {/* ROUTE TO SIGNUP VIEW */}
         <Route
           path="/signup"
           element={
@@ -78,6 +79,7 @@ return (
             </>
           }
         />
+        {/* ROUTE TO LOGIN VIEW */}
         <Route
           path="/login"
           element={
@@ -92,6 +94,8 @@ return (
             </>
           }
         />
+        {/* ROUTE TO PROFILE VIEW */}
+
         <Route
           path="/profile"
           element={
@@ -106,6 +110,7 @@ return (
             )
           }
         />
+        {/* ROUTE TO SINGLE MOVIE VIEW */}
         <Route
           path="/movies/:movieId"
           element={
@@ -125,6 +130,7 @@ return (
             </>
           }
         />
+        {/* ROUTE TO MAIN VIEW */}
         <Route
           path="/"
           element={
@@ -132,6 +138,7 @@ return (
               {!user ? (
                 <Navigate to="/login" replace />
               ) : movies.length === 0 ? (
+                // Displays spinner if no movies yet
                 <Col className="text-light text-center loader">
                   <div className="spinner">
                   </div>
@@ -139,9 +146,11 @@ return (
                 </Col>
               ) : (
                 <>
+                {/* MAIN VIEW DISPLAY */}
                   <Row className="justify-content-center">
                     <Col md={5}>
                       <Form className="m-3">
+                        {/* search bar */}
                         <Form.Control
                           onChange={(m) => setSearch(m.target.value)}
                           type="search"
@@ -152,6 +161,7 @@ return (
                       </Form>
                     </Col>
                   </Row>
+                  {/* Movie Grid goes here */}
                   {movies.filter((searchInput) => {
                     const lowerCaseSearch = search.toLowerCase();
                     if (lowerCaseSearch === '' || searchInput.title.toLowerCase().includes(lowerCaseSearch)) {

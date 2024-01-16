@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import "../movie-view/movie-view.scss";
+import "./movie-view.scss";
 import { MovieCard } from "../movie-card/movie-card";
 import Row from 'react-bootstrap/Row';// rows can be divided into twelfths
 import Col from 'react-bootstrap/Col';
@@ -125,33 +125,33 @@ const MovieView = ({ movies, user, token, updateUser }) => {
 
   return (
     <Container>
-      <Row className="mb-5">
+      <Row className="mb-5 d-flex justify-content-center">
         <Col md={10} lg={4} xl={4} className=" m-xs-5">
-          <Card >
+          <Card className="mt-5">
             <Card.Body className="d-flex flex-column justify-content-between">
               <Row>
                 <Card.Img className="h-100" src={movie.image} />
               </Row>
               <Row>
 
-                <Card.Title className="mt-4">{movie.title}</Card.Title>
+                <Card.Title className="mt-4"><h3>{movie.title}</h3></Card.Title>
               </Row>
               <Row>
                 <Col>
-                  <Card.Header className="bg-black text-light"> Director: </Card.Header>
+                  <Card.Header className="bg-black text-light"> <h4>Director: </h4></Card.Header>
                   <Card.Text>
-                    <Button className="fs-6" variant="link" onClick={displayDirectorModal}>{movie.director}</Button>
+                    <Button className="fs-6" variant="link" onClick={displayDirectorModal}> <h5>{movie.director}</h5></Button>
                   </Card.Text>
                 </Col>
                 <Col >
-                  <Card.Header className="bg-black text-light">Genre: </Card.Header>
+                  <Card.Header className="bg-black text-light"><h4>Genre: </h4></Card.Header>
                   <Card.Text>
-                    <Button className="fs-6" variant="link" onClick={displayGenreModal}>{movie.genre}</Button>
+                    <Button className="fs-6" variant="link" onClick={displayGenreModal}><h5>{movie.genre}</h5></Button>
                   </Card.Text>
                 </Col>
                 <Col >
                   <Card.Text>
-                    <Button className="fs-6" variant="link" onClick={() => displaySynopsisModal(movie.description)}>Synopsis</Button>
+                    <Button className="fs-6" variant="link" onClick={() => displaySynopsisModal(movie.description)}><h5>Synopsis</h5></Button>
                   </Card.Text>
                 </Col>
               </Row>
@@ -179,14 +179,13 @@ const MovieView = ({ movies, user, token, updateUser }) => {
             </Card.Body>
           </Card>
         </Col>
-        <Col className="d-none d-md-block"></Col>
         <Col md={10} lg={7} xl={6}>
           <h2 className="similar-movies__title">Similar Movies</h2>
           {similarMovies.length === 0 ? (
 
             <p className="d-flex text-align-center no-similar text-light ">No other movies of {movie.genre} genre in the archive!</p>
           ) : (
-            <Row className="justify-content-right min-vh-60" >
+            <Row className="justify-content-center min-vh-60" >
               {similarMovies.map((movie) => (
                 <Col md={6} lg={4} xl={4} className="mb-4 h-100 similar-movies profile-movie" key={movie.id}>
                   <MovieCard movie={movie} />

@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import ModalView from "../modal-view/modal-view";
-import "../signup-view/signup-view.scss"
+import "./signup-view.scss"
 
 
 export const SignupView = () => {

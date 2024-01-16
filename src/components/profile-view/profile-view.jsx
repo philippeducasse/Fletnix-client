@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Form, Button, Col, Row, Card, Container, Modal } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 import ModalView from "../modal-view/modal-view";
-import "../profile-view/profile-view.scss"
+import "./profile-view.scss"
 
 export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) => {
 
@@ -80,29 +80,7 @@ export const ProfileView = ({ user, token, updateUser, movies, onLoggedOut }) =>
     const hideModal = () => {
         setShowModal(false)
     }
-    //CODE TO DISPLAY BIRTHDAY IN FORM --> MODIFY HOW IT IS STORED ON DB
-    // useEffect(() => {
-    //     const dateString = { birthday };
-    //     console.log(dateString.birthday)
-    //     // Create a Date object from the input date string
-    //     const dateObject = new Date(dateString.birthday);
-    //     console.log({ dateObject })
-    //     // Get the day, month, and year components from the Date object
-    //     const day = dateObject.getUTCDate();
-    //     const month = dateObject.getUTCMonth() + 1; // Add 1 because months are zero-based
-    //     const year = dateObject.getUTCFullYear();
-
-    //     // Pad the day and month with leading zeros if needed (e.g., 03 instead of 3)
-    //     const formattedDay = day.toString().padStart(2, '0');
-    //     const formattedMonth = month.toString().padStart(2, '0');
-
-    //     // Create the formatted date string in "dd.mm.yyyy" format
-    //     const formattedDate = `${formattedDay}.${formattedMonth}.${year}`;
-    //     // Output: "dd.mm.yyyy"
-
-    //     setBirthday(formattedDate);
-    // }
-    // )
+   
     return (
         <Container>
 

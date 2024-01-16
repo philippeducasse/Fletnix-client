@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Navbar, Container, Nav, Form } from "react-bootstrap";
-import "../navigation-bar/navigation-bar.scss"
+import "./navigation-bar.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPerson, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
