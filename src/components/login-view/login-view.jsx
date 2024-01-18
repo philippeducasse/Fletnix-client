@@ -39,7 +39,7 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <>
+    <div className="vh-100">
     <h3 className="welcome text-light text-center"> Welcome to Fletnix! Please login to begin browsing our movie collection.</h3>
     <p className="text-light my-5">You can use the username "testuser" and the password "password" to login without creating an account.</p>
       <Form className="text-light mb-5  d-flex flex-column justify-content-center align-items-center my-auto" onSubmit={handleSubmit}>
@@ -67,6 +67,6 @@ export const LoginView = ({ onLoggedIn }) => {
           Login
         </Button>
       </Form>
-    </>
+    </div>
   );
 };
