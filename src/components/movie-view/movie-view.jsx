@@ -130,10 +130,9 @@ const MovieView = ({ movies, user, token, updateUser }) => {
           <Card className="mt-5">
             <Card.Body className="d-flex flex-column justify-content-between">
               <Row>
-                <Card.Img className="h-100" src={movie.image} />
+                <Card.Img className="h-100" src={movie.image}/>
               </Row>
               <Row>
-
                 <Card.Title className="mt-4"><h3>{movie.title}</h3></Card.Title>
               </Row>
               <Row>
