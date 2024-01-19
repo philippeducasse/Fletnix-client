@@ -133,7 +133,6 @@ const MovieView = ({ movies, user, token, updateUser }) => {
                 <Card.Img className="h-100" src={movie.image} />
               </Row>
               <Row>
-
                 <Card.Title className="mt-4"><h3>{movie.title}</h3></Card.Title>
               </Row>
               <Row>

@@ -40,4 +40,4 @@ to build the app, run
 
 ## Credits
 
-Thank you to my mentor from CareerFoundry, Treasure Kabareebe & my tutor Jonathan Nshuti. Special thanks to my friend Stephen Duke. 
+Thank you to my mentor from CareerFoundry, Treasure Kabareebe & my tutor Jonathan Nshuti. 
