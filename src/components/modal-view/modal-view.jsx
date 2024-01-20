@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "./modal-view.scss";
 
 
 const ModalView = ({ showModal, hideModal, type, deleteAccount, message, title }) => {
@@ -33,7 +34,7 @@ const ModalView = ({ showModal, hideModal, type, deleteAccount, message, title }
             Ok
           </Button>
         ) : (
-          <Button variant="default" onClick={hideModal}>
+          <Button variant="primary" onClick={hideModal}>
             Back
           </Button>
         )}

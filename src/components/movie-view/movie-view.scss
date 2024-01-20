@@ -10,6 +10,7 @@
 
 .btn-link{
     margin-bottom: 10px;
+    height: 6em;
 }
 .card {
     text-align: center;
@@ -66,9 +67,16 @@ h2{
     height: 100%;
   }
 
-@media screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     .profile-movie img {
-        max-height: 350px;
+        max-height: 165px;
     }
 }
+
+@media screen and (max-width: 991px) {
+    .profile-movie img {
+        max-height: 365px;
+    }
+}
+
 
