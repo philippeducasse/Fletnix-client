@@ -181,7 +181,7 @@ const MainView = () => {
                             <Form.Control
                               onChange={(m) => setSearch(m.target.value)}
                               type="search"
-                              placeholder="🔍 Search by Movie Title"
+                              placeholder="Search by Movie Title"
                               className="text-dark search-bar"
                               aria-label="Search"
                             />
