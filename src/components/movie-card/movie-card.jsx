@@ -42,22 +42,27 @@ export const MovieCard = ({movie, isProfileView, token, user, updateUser}) => {
       });
   }
   return (
-        <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-    <Card className="h-100 ">
-      <Card.Img variant="top" src={movie.image} className="h-60 movie-image"/>
-      
-      <Card.Body className= "card-body" >
-        <Card.Title className="card-title fs-xs-8" >{movie.title}</Card.Title>
-        <Card.Text>{movie.author}</Card.Text>
-        {isProfileView ? (
-          <Button onClick= {removeFavorite} className="remove-btn">Remove from favorites</Button>
-          ):
-          (<>
-        </>
-        )}
-      </Card.Body>
-    </Card>
-        </Link>
+    <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+      <Card className="h-100 ">
+        <Card.Img
+          variant="top"
+          src={movie.image}
+          className="h-60 movie-image"
+        />
+
+        <Card.Body className="card-body">
+          <Card.Title className="card-title fs-xs-8">{movie.title}</Card.Title>
+          <Card.Text>{movie.author}</Card.Text>
+          {isProfileView ? (
+            <Button onClick={removeFavorite} className="remove-btn">
+              Remove from favorites
+            </Button>
+          ) : (
+            <></>
+          )}
+        </Card.Body>
+      </Card>
+    </Link>
   );
 };
 
