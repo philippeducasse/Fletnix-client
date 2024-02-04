@@ -213,8 +213,7 @@ const MainView = () => {
                           key={movie.id}
                           sm={8}
                           md={8}
-                          lg={4}
-                          xl={3}
+                          lg={3}
                         >
                           <MovieCard
                             movie={movie}
